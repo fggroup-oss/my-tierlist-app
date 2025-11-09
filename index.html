@@ -12,24 +12,18 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background: #f0f2f5;
-            padding: 15px;
+            background: #f5f5f5;
+            padding: 10px;
             max-width: 600px;
             margin: 0 auto;
         }
         .header {
             text-align: center;
-            padding: 20px 10px;
+            padding: 20px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            border-radius: 12px;
             margin-bottom: 20px;
-        }
-        .header h1 {
-            font-size: 24px;
-            color: #202020;
-        }
-        .header p {
-            color: #666;
-            font-size: 14px;
-            margin-top: 8px;
         }
         .welcome {
             text-align: center;
@@ -39,36 +33,21 @@
             border-radius: 15px;
             margin-bottom: 25px;
         }
-        .welcome h2 {
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
-        .welcome p {
-            font-size: 16px;
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
         .start-btn {
             display: block;
             width: 100%;
             padding: 16px;
-            background: #fff;
+            background: white;
             color: #2c3e50;
             border: none;
             border-radius: 12px;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
         }
-        .start-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
         .theme-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 15px;
             margin-bottom: 25px;
         }
@@ -79,124 +58,95 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             cursor: pointer;
             transition: transform 0.2s;
-            padding: 20px;
-            text-align: center;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         .theme-card:hover {
             transform: translateY(-4px);
         }
+        .theme-img {
+            width: 100%;
+            height: 120px;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 12px;
+        }
         .theme-title {
+            padding: 12px;
+            text-align: center;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 16px;
             color: #333;
         }
-        .theme-rpg { background: #e8f5e9; } /* светло-зелёный */
-        .theme-roguelike { background: #ffe0b2; } /* светло-оранжевый */
-        .theme-metroidvania { background: #bbdefb; } /* светло-синий */
-
         .game-card {
             background: white;
             border-radius: 12px;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .game-img {
+            width: 80px;
+            height: 80px;
+            background: #eee;
+            border-radius: 8px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 12px;
         }
         .game-name {
             font-size: 20px;
             font-weight: bold;
             margin: 10px 0;
-            color: #333;
         }
-        .limits {
-            display: flex;
-            justify-content: space-around;
-            margin: 15px 0;
-            font-size: 13px;
-        }
-        .limit-box {
-            text-align: center;
-        }
-        .limit-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        .limit-count {
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .goty .limit-count { color: #2e7d32; }
-        .excellent .limit-count { color: #1976d2; }
-        .okay .limit-count { color: #f57c00; }
-        .trash .limit-count { color: #d32f2f; }
-
-        .categories {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 20px;
-        }
-        .cat-btn {
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            color: white;
-            opacity: 0.85;
-            transition: opacity 0.2s;
-        }
-        .cat-btn:hover { opacity: 1; }
-        .cat-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-        .goty-btn { background: #4caf50; }
-        .excellent-btn { background: #2196f3; }
-        .okay-btn { background: #ff9800; }
-        .trash-btn { background: #f44336; }
-
-        .progress {
-            text-align: center;
-            margin: 15px 0;
-            font-size: 16px;
-            color: #555;
-        }
-
-        .result {
+        .tier-list {
             background: white;
             border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
-        .result h2 {
-            margin-bottom: 15px;
-            color: #333;
-            text-align: center;
+        .tier-header {
+            padding: 12px 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
         }
-        .result-list {
-            margin-top: 10px;
+        .tier-goat { background: #4CAF50; }
+        .tier-good { background: #8BC34A; }
+        .tier-norm { background: #FF9800; }
+        .tier-bad { background: #F44336; }
+        .tier-items {
+            padding: 15px;
         }
-        .result-tier {
-            margin-bottom: 15px;
-        }
-        .result-tier h3 {
+        .tier-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #f9f9f9;
             margin-bottom: 8px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #eee;
+            border-radius: 8px;
         }
-        .goty { color: #2e7d32; }
-        .excellent { color: #1976d2; }
-        .okay { color: #f57c00; }
-        .trash { color: #d32f2f; }
-
+        .rating-bar {
+            width: 100px;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            position: relative;
+        }
+        .rating-fill {
+            height: 100%;
+            border-radius: 4px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
         .result-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -217,49 +167,6 @@
         .btn-retry { background: #4caf50; }
         .btn-rating { background: #ff9800; }
         .btn-share { background: #e91e63; }
-
-        .rating-full {
-            margin-top: 20px;
-            padding: 15px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        .rating-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .rating-item:last-child {
-            border-bottom: none;
-        }
-        .rating-game {
-            flex: 1;
-            font-size: 15px;
-        }
-        .rating-bar {
-            width: 100px;
-            height: 8px;
-            background: #eee;
-            border-radius: 4px;
-            margin: 0 10px;
-            position: relative;
-        }
-        .rating-fill {
-            height: 100%;
-            border-radius: 4px;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-        .rating-percent {
-            font-size: 14px;
-            min-width: 50px;
-            text-align: right;
-        }
-
         .exclusive {
             text-align: center;
             padding: 12px;
@@ -270,14 +177,41 @@
             margin-top: 20px;
             font-weight: bold;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .categories {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
         }
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
+        .cat-btn {
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+            opacity: 0.85;
         }
+        .cat-btn:hover { opacity: 1; }
+        .cat-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .goty-btn { background: #4caf50; }
+        .excellent-btn { background: #2196f3; }
+        .okay-btn { background: #ff9800; }
+        .trash-btn { background: #f44336; }
+        .limits {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+        .limit-box { text-align: center; }
+        .limit-title { font-weight: bold; margin-bottom: 3px; }
+        .limit-count { font-size: 16px; font-weight: bold; }
+        .progress { text-align: center; margin: 15px 0; }
     </style>
 </head>
 <body>
@@ -285,131 +219,134 @@
         <h1>🎮 Тир-лист Игр</h1>
     </div>
 
-    <div id="app">
-        <!-- Динамическое содержимое -->
-    </div>
+    <div id="app"></div>
 
     <script>
-        // === ДАННЫЕ ПО ТЕМАМ ===
+        // === НАСТРОЙКИ ТИР-ЛИСТОВ ===
         const THEMES = {
-            rpg: {
-                title: "🎲 Ролевые игры (RPG)",
-                games: [
-                    "The Witcher 3", "Baldur's Gate 3", "Divinity: Original Sin 2",
-                    "Disco Elysium", "Final Fantasy VII Remake", "Elden Ring",
-                    "Dragon Age: Inquisition", "Fallout: New Vegas", "Mass Effect 2",
-                    "Persona 5 Royal", "Cyberpunk 2077", "Kingdom Come: Deliverance",
-                    "Pillars of Eternity", "Tales of Arise", "Octopath Traveler",
-                    "Starfield", "Dark Souls III", "NieR: Automata", "Xenoblade Chronicles",
-                    "Genshin Impact"
-                ]
-            },
-            roguelike: {
-                title: "🔥 Рогалики",
-                games: [
-                    "Hades", "Dead Cells", "Slay the Spire", "Returnal",
-                    "Risk of Rain 2", "Spelunky 2", "Enter the Gungeon",
-                    "Vampire Survivors", "The Binding of Isaac", "Rogue Legacy 2",
-                    "FTL: Faster Than Light", "Nuclear Blaze", "Loop Hero",
-                    "Cult of the Lamb", "20 Minutes Till Dawn", "Brotato",
-                    "Katana ZERO", "Noita", "NeuroVoider", "Wizard of Legend"
-                ]
-            },
             metroidvania: {
-                title: "🕳️ Метроидвании",
+                title: "Метроидвании",
+                // ЛИМИТЫ — менять можно здесь!
+                limits: { goty: 1, excellent: 5, okay: 7, trash: 7 },
                 games: [
-                    "Hollow Knight", "Metroid Dread", "Castlevania: Symphony of the Night",
-                    "Axiom Verge", "Blasphemous", "Dead Cells", "Ori and the Blind Forest",
-                    "Celeste", "Bloodstained: Ritual of the Night", "Ender Lilies",
-                    "Katana ZERO", "Shadow Complex", "Infernax", "Monster Boy",
-                    "Unsighted", "Timespinner", "Dandara", "Aeterna Noctis",
-                    "The Messenger", "Grime"
+                    { name: "Hollow Knight", img: "Hollow Knight" },
+                    { name: "Metroid Dread", img: "Metroid Dread" },
+                    { name: "Blasphemous", img: "Blasphemous" },
+                    { name: "Celeste", img: "Celeste" },
+                    { name: "Dead Cells", img: "Dead Cells" },
+                    { name: "Ori and the Blind Forest", img: "Ori" },
+                    { name: "Katana ZERO", img: "Katana ZERO" },
+                    { name: "The Messenger", img: "The Messenger" },
+                    { name: "Axiom Verge", img: "Axiom Verge" },
+                    { name: "Castlevania: SotN", img: "Castlevania" },
+                    { name: "Grime", img: "Grime" },
+                    { name: "Ender Lilies", img: "Ender Lilies" },
+                    { name: "Infernax", img: "Infernax" },
+                    { name: "Dandara", img: "Dandara" },
+                    { name: "Unsighted", img: "Unsighted" },
+                    { name: "Timespinner", img: "Timespinner" },
+                    { name: "Monster Boy", img: "Monster Boy" },
+                    { name: "Shadow Complex", img: "Shadow Complex" },
+                    { name: "Aeterna Noctis", img: "Aeterna Noctis" },
+                    { name: "Bloodstained", img: "Bloodstained" }
+                ]
+            },
+            rpg: {
+                title: "Ролевые игры (RPG)",
+                limits: { goty: 2, excellent: 6, okay: 6, trash: 6 },
+                games: [
+                    { name: "The Witcher 3", img: "Witcher 3" },
+                    { name: "Baldur's Gate 3", img: "BG3" },
+                    { name: "Elden Ring", img: "Elden Ring" },
+                    { name: "Disco Elysium", img: "Disco Elysium" },
+                    { name: "Cyberpunk 2077", img: "Cyberpunk" },
+                    { name: "Persona 5 Royal", img: "P5R" },
+                    { name: "Mass Effect 2", img: "ME2" },
+                    { name: "Fallout: NV", img: "Fallout NV" },
+                    { name: "Divinity: OS2", img: "Divinity" },
+                    { name: "Xenoblade", img: "Xenoblade" },
+                    { name: "Final Fantasy VII", img: "FF7" },
+                    { name: "Dragon Age: Inq", img: "DAI" },
+                    { name: "Genshin Impact", img: "Genshin" },
+                    { name: "Starfield", img: "Starfield" },
+                    { name: "Kingdom Come", img: "KC" },
+                    { name: "NieR: Automata", img: "NieR" },
+                    { name: "Tales of Arise", img: "ToA" },
+                    { name: "Octopath Traveler", img: "Octopath" },
+                    { name: "Pillars of Eternity", img: "PoE" },
+                    { name: "Dark Souls III", img: "DS3" }
                 ]
             }
+            // Можно добавить ещё темы
         };
 
-        const LIMITS = { goty: 2, excellent: 6, okay: 6, trash: 6 };
-
         // === СОСТОЯНИЕ ===
-        let currentTheme = null;
+        let currentThemeKey = null;
         let assigned = { goty: [], excellent: [], okay: [], trash: [] };
         let currentIndex = 0;
 
         // === ЭКРАНЫ ===
         function showWelcome() {
-            const html = `
-                <div class="welcome fade-in">
+            document.getElementById('app').innerHTML = `
+                <div class="welcome">
                     <h2>👋 Привет, геймер!</h2>
-                    <p>Создай свой тир-лист по любимым играм. Оцени 20 игр по категориям с лимитами.</p>
+                    <p>Создай свой тир-лист по любимым играм</p>
                     <button class="start-btn" onclick="showThemeSelect()">Начать →</button>
                 </div>
                 <div class="exclusive">Эксклюзив сообщества Fan Games</div>
             `;
-            document.getElementById('app').innerHTML = html;
         }
 
         function showThemeSelect() {
-            let html = `<h2 style="text-align:center; margin-bottom:20px;">Выбери тему:</h2>`;
-            html += `<div class="theme-grid">`;
-
+            let html = `<h2 style="text-align:center;margin:20px 0;">Выбери тему:</h2><div class="theme-grid">`;
             for (const [key, theme] of Object.entries(THEMES)) {
-                const className = `theme-${key}`;
                 html += `
-                    <div class="theme-card ${className}" onclick="startTheme('${key}')">
-                        <div class="theme-title">${theme.title}</div>
+                    <div class="theme-card" onclick="startTheme('${key}')">
+                        <div class="theme-img">Картинка: ${theme.title}</div>
+                        <div class="theme-title">🎮 ${theme.title}</div>
                     </div>
                 `;
             }
-
             html += `</div><div class="exclusive">Эксклюзив сообщества Fan Games</div>`;
             document.getElementById('app').innerHTML = html;
         }
 
         function startTheme(themeKey) {
-            currentTheme = themeKey;
+            currentThemeKey = themeKey;
+            const limits = THEMES[themeKey].limits;
             assigned = { goty: [], excellent: [], okay: [], trash: [] };
             currentIndex = 0;
             renderGameScreen();
         }
 
         function updateLimitsUI() {
+            const limits = THEMES[currentThemeKey].limits;
             const used = {
                 goty: assigned.goty.length,
                 excellent: assigned.excellent.length,
                 okay: assigned.okay.length,
                 trash: assigned.trash.length
             };
-            const limitsHTML = `
+            const html = `
                 <div class="limits">
-                    <div class="limit-box goty">
-                        <div class="limit-title">GOTY</div>
-                        <div class="limit-count">${used.goty}/${LIMITS.goty}</div>
-                    </div>
-                    <div class="limit-box excellent">
-                        <div class="limit-title">Отлично</div>
-                        <div class="limit-count">${used.excellent}/${LIMITS.excellent}</div>
-                    </div>
-                    <div class="limit-box okay">
-                        <div class="limit-title">Терпимо</div>
-                        <div class="limit-count">${used.okay}/${LIMITS.okay}</div>
-                    </div>
-                    <div class="limit-box trash">
-                        <div class="limit-title">Мусор</div>
-                        <div class="limit-count">${used.trash}/${LIMITS.trash}</div>
-                    </div>
+                    <div class="limit-box"><div class="limit-title">GOTY</div><div class="limit-count">${used.goty}/${limits.goty}</div></div>
+                    <div class="limit-box"><div class="limit-title">Отлично</div><div class="limit-count">${used.excellent}/${limits.excellent}</div></div>
+                    <div class="limit-box"><div class="limit-title">Терпимо</div><div class="limit-count">${used.okay}/${limits.okay}</div></div>
+                    <div class="limit-box"><div class="limit-title">Мусор</div><div class="limit-count">${used.trash}/${limits.trash}</div></div>
                 </div>
             `;
-            document.querySelector('#limits-container').innerHTML = limitsHTML;
+            document.getElementById('limits-container').innerHTML = html;
         }
 
         function renderGameScreen() {
-            if (!currentTheme || currentIndex >= THEMES[currentTheme].games.length) {
+            const theme = THEMES[currentThemeKey];
+            if (currentIndex >= theme.games.length) {
                 renderResults();
                 return;
             }
 
-            const gameList = THEMES[currentTheme].games;
-            const game = gameList[currentIndex];
+            const game = theme.games[currentIndex];
+            const limits = theme.limits;
             const used = {
                 goty: assigned.goty.length,
                 excellent: assigned.excellent.length,
@@ -417,133 +354,132 @@
                 trash: assigned.trash.length
             };
 
-            const btnDisabled = {
-                goty: used.goty >= LIMITS.goty,
-                excellent: used.excellent >= LIMITS.excellent,
-                okay: used.okay >= LIMITS.okay,
-                trash: used.trash >= LIMITS.trash
+            const disabled = {
+                goty: used.goty >= limits.goty,
+                excellent: used.excellent >= limits.excellent,
+                okay: used.okay >= limits.okay,
+                trash: used.trash >= limits.trash
             };
 
-            const html = `
-                <div class="progress">${THEMES[currentTheme].title}</div>
-                <div class="progress">Игра ${currentIndex + 1} из ${gameList.length}</div>
+            document.getElementById('app').innerHTML = `
+                <div class="progress">${theme.title} • Игра ${currentIndex + 1} из ${theme.games.length}</div>
                 <div class="game-card">
-                    <div class="game-name">${game}</div>
+                    <div class="game-img">${game.img}</div>
+                    <div class="game-name">${game.name}</div>
                     <div id="limits-container"></div>
                     <div class="categories">
-                        <button class="cat-btn goty-btn" ${btnDisabled.goty ? 'disabled' : ''} onclick="assignCategory('goty')">
-                            GOTY
-                        </button>
-                        <button class="cat-btn excellent-btn" ${btnDisabled.excellent ? 'disabled' : ''} onclick="assignCategory('excellent')">
-                            Отлично
-                        </button>
-                        <button class="cat-btn okay-btn" ${btnDisabled.okay ? 'disabled' : ''} onclick="assignCategory('okay')">
-                            Терпимо
-                        </button>
-                        <button class="cat-btn trash-btn" ${btnDisabled.trash ? 'disabled' : ''} onclick="assignCategory('trash')">
-                            Мусор
-                        </button>
+                        <button class="cat-btn goty-btn" ${disabled.goty ? 'disabled' : ''} onclick="assign('goty')">GOTY</button>
+                        <button class="cat-btn excellent-btn" ${disabled.excellent ? 'disabled' : ''} onclick="assign('excellent')">Отлично</button>
+                        <button class="cat-btn okay-btn" ${disabled.okay ? 'disabled' : ''} onclick="assign('okay')">Терпимо</button>
+                        <button class="cat-btn trash-btn" ${disabled.trash ? 'disabled' : ''} onclick="assign('trash')">Мусор</button>
                     </div>
                 </div>
+                <div class="exclusive">Эксклюзив сообщества Fan Games</div>
             `;
-
-            document.getElementById('app').innerHTML = html;
             updateLimitsUI();
         }
 
-        function assignCategory(category) {
-            const gameList = THEMES[currentTheme].games;
-            assigned[category].push(gameList[currentIndex]);
+        function assign(category) {
+            const game = THEMES[currentThemeKey].games[currentIndex];
+            assigned[category].push(game);
             currentIndex++;
             renderGameScreen();
         }
 
         function renderResults() {
-            const themeTitle = THEMES[currentTheme].title;
-            let resultHTML = `
-                <div class="result">
-                    <h2>✅ Готово!</h2>
-                    <p style="text-align:center; margin-bottom:15px;"><em>${themeTitle}</em></p>
+            const theme = THEMES[currentThemeKey];
+            let html = `
+                <div style="text-align:center;margin-bottom:20px;">
+                    <h2>ТИР-ЛИСТ "${theme.title}"</h2>
+                </div>
             `;
 
             const tiers = [
-                { key: 'goty', title: '🏆 GOTY', class: 'goty' },
-                { key: 'excellent', title: '🌟 Отлично', class: 'excellent' },
-                { key: 'okay', title: '😐 Терпимо', class: 'okay' },
-                { key: 'trash', title: '🗑️ Мусор', class: 'trash' }
+                { key: 'goty', title: 'GOTY', class: 'tier-goat' },
+                { key: 'excellent', title: 'Отлично', class: 'tier-good' },
+                { key: 'okay', title: 'Терпимо', class: 'tier-norm' },
+                { key: 'trash', title: 'Мусор', class: 'tier-bad' }
             ];
 
-            tiers.forEach(tier => {
-                if (assigned[tier.key].length > 0) {
-                    resultHTML += `
-                        <div class="result-tier">
-                            <h3 class="${tier.class}">${tier.title}</h3>
-                            <ul class="result-list">
-                                ${assigned[tier.key].map(game => `<li>${game}</li>`).join('')}
-                            </ul>
+            tiers.forEach(t => {
+                if (assigned[t.key].length > 0) {
+                    html += `<div class="tier-list">
+                        <div class="tier-header ${t.class}">${t.title}</div>
+                        <div class="tier-items">
+                            ${assigned[t.key].map(g => `<div class="tier-item">${g.name}</div>`).join('')}
                         </div>
-                    `;
+                    </div>`;
                 }
             });
 
-            resultHTML += `
+            html += `
                 <div class="result-actions">
                     <button class="action-btn btn-theme" onclick="showThemeSelect()">Другая тема</button>
-                    <button class="action-btn btn-retry" onclick="startTheme('${currentTheme}')">Пересоздать</button>
+                    <button class="action-btn btn-retry" onclick="startTheme('${currentThemeKey}')">Пересоздать</button>
                     <button class="action-btn btn-rating" onclick="showRating()">Рейтинг игроков</button>
-                    <button class="action-btn btn-share" onclick="shareResult()">Поделиться</button>
+                    <div style="position:relative; margin-top:15px;">
+                        <span style="position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:#ff6b6b; color:white; font-size:10px; padding:3px 8px; border-radius:12px; white-space:nowrap; z-index:10;">В разработке</span>
+                        <button class="action-btn btn-share" disabled style="opacity:0.6; cursor:not-allowed;">Поделиться</button>
+                    </div>
                 </div>
                 <div class="exclusive">Эксклюзив сообщества Fan Games</div>
-            </div>
             `;
 
-            document.getElementById('app').innerHTML = resultHTML;
+            document.getElementById('app').innerHTML = html;
         }
 
         function showRating() {
-            const themeGames = THEMES[currentTheme].games;
-            const html = `
-                <div class="result">
-                    <h2>👥 Общий рейтинг игроков</h2>
-                    <p style="text-align:center; margin-bottom:15px;"><em>${THEMES[currentTheme].title}</em></p>
-                    <div class="rating-full">
-                        ${themeGames.map((game, idx) => {
-                            const percent = Math.floor(Math.random() * 100);
-                            const color = percent > 70 ? '#4caf50' : percent > 40 ? '#ff9800' : '#f44336';
+            const theme = THEMES[currentThemeKey];
+            let html = `
+                <div style="text-align:center;margin-bottom:20px;">
+                    <h2>Рейтинг игроков</h2>
+                    <p>${theme.title}</p>
+                </div>
+                <div class="tier-list">
+                    <div class="tier-header tier-goat">GOTY</div>
+                    <div class="tier-items">
+                        ${theme.games.map(g => {
+                            const p = Math.floor(Math.random() * 100);
+                            const c = p > 70 ? '#4caf50' : p > 40 ? '#ff9800' : '#f44336';
                             return `
-                                <div class="rating-item">
-                                    <div class="rating-game">${game}</div>
+                                <div class="tier-item">
+                                    <span>${g.name}</span>
                                     <div class="rating-bar">
-                                        <div class="rating-fill" style="width: ${percent}%; background: ${color};"></div>
+                                        <div class="rating-fill" style="width:${p}%;background:${c}"></div>
                                     </div>
-                                    <div class="rating-percent">${percent}%</div>
+                                    <span>${p}%</span>
                                 </div>
                             `;
                         }).join('')}
                     </div>
-                    <button class="theme-btn" onclick="renderResults()">← Назад</button>
-                    <div class="exclusive">Эксклюзив сообщества Fan Games</div>
                 </div>
+                <button class="action-btn btn-theme" onclick="renderResults()" style="width:100%;margin-top:20px;">← Назад</button>
+                <div class="exclusive">Эксклюзив сообщества Fan Games</div>
             `;
             document.getElementById('app').innerHTML = html;
         }
 
-        function shareResult() {
-            const text = `🎮 Я создал тир-лист по теме "${THEMES[currentTheme].title}"!\nПройди и ты: ${window.location.href}`;
-            
+        function share() {
+            const theme = THEMES[currentThemeKey].title;
+            const channelLink = "https://t.me/fan_games_channel"; // ← ЗАМЕНИТЕ на вашу ссылку!
+            const appLink = window.location.href;
+
+            const text = `ТИР-ЛИСТ "${theme}"\nСобери свой и делись с друзьями в ${channelLink}\n\nСоздать свой тир-лист → ${appLink}`;
+
             if (navigator.share) {
-                navigator.share({
-                    title: 'Мой тир-лист игр',
-                    text: text
-                }).catch(console.error);
+                navigator.share({ title: 'Мой тир-лист', text }).catch(() => copyText(text));
             } else {
-                navigator.clipboard.writeText(text).then(() => {
-                    alert('Ссылка скопирована! Отправь её в Telegram.');
-                });
+                copyText(text);
             }
         }
 
-        // === СТАРТ ===
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Текст скопирован!\nОтправь его в Telegram.');
+            });
+        }
+
+        // СТАРТ
         showWelcome();
     </script>
 </body>
