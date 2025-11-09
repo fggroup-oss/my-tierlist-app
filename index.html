@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тир-лист: Игры и Достижения</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: #f5f5f5;
+            padding: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .game-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .game-btn {
+            padding: 10px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .game-btn:hover {
+            background: #45a049;
+        }
+        .tier-list {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .tier-header {
+            padding: 12px 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .tier-goat { background: #4CAF50; }
+        .tier-good { background: #8BC34A; }
+        .tier-norm { background: #FF9800; }
+        .tier-bad { background: #F44336; }
+        .tier-items {
+            padding: 15px;
+        }
+        .tier-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #f9f9f9;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            border-left: 4px solid transparent;
+        }
+        .tier-item:nth-child(odd) {
+            background: #fff;
+        }
+        .tier-item .rank {
+            width: 30px;
+            height: 30px;
+            background: #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .tier-item .name {
+            flex: 1;
+            margin-left: 10px;
+            font-size: 16px;
+        }
+        .tier-item .percent {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .back-btn:hover {
+            background: #2980b9;
+        }
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎮 Тир-лист: Игры и Достижения</h1>
+        <p>Создавайте и смотрите рейтинги игроков, персонажей, достижений</p>
+    </div>
+
+    <div class="game-selector" id="gameSelector">
+        <button class="game-btn" data-game="bavaria">Бавария</button>
+        <button class="game-btn" data-game="valorant">Valorant</button>
+        <button class="game-btn" data-game="gta">GTA V</button>
+    </div>
+
+    <div id="tierListContainer">
+        <!-- Здесь будут отображаться тир-листы -->
+    </div>
+
+    <div class="footer">
+        © 2025 GameTierListBot • Создано для Telegram Mini Apps
+    </div>
+
+    <script>
+        // Данные для тир-листов (можно добавлять свои игры)
+        const tierLists = {
+            bavaria: {
+                title: "Бавария",
+                tiers: [
+                    {
+                        name: "GOAT",
+                        color: "goat",
+                        items: [
+                            { rank: 1, name: "Харри Кейн", percent: "86.4%" },
+                            { rank: 2, name: "Майкл Олисе", percent: "38.1%" },
+                            { rank: 3, name: "Йозуа Киммих", percent: "36.3%" },
+                            { rank: 4, name: "Джамал Мусиала", percent: "17.4%" },
+                            { rank: 5, name: "Мануэль Нойер", percent: "8.0%" },
+                            { rank: 6, name: "Луис Диас", percent: "2.0%" },
+                            { rank: 7, name: "Николас Джексон", percent: "1.4%" },
+                            { rank: 8, name: "Хироки Ито", percent: "1.1%" },
+                            { rank: 9, name: "Альфонсо Дэвис", percent: "0.7%" },
+                            { rank: 10, name: "Александр Павлович", percent: "0.6%" }
+                        ]
+                    },
+                    {
+                        name: "ХОРОШ",
+                        color: "good",
+                        items: [
+                            { rank: 1, name: "Леон Горецка", percent: "62.2%" },
+                            { rank: 2, name: "Александр Павлович", percent: "59.8%" },
+                            { rank: 3, name: "Серж Гнабри", percent: "51.9%" },
+                            { rank: 4, name: "Дайо Упамекано", percent: "51.9%" },
+                            { rank: 5, name: "Конрад Лаймер", percent: "45.4%" },
+                            { rank: 6, name: "Альфонсо Дэвис", percent: "43.6%" },
+                            { rank: 7, name: "Джонатан Та", percent: "42.4%" },
+                            { rank: 8, name: "Ким Мин Джэ", percent: "41.3%" },
+                            { rank: 9, name: "Мануэль Нойер", percent: "33.4%" },
+                            { rank: 10, name: "Йосип Станишич", percent: "33.3%" }
+                        ]
+                    },
+                    {
+                        name: "НОРМ",
+                        color: "norm",
+                        items: [
+                            { rank: 1, name: "Саша Боэ", percent: "85.6%" },
+                            { rank: 2, name: "Том Бишоф", percent: "71.9%" },
+                            { rank: 3, name: "Рафаэл Геррейро", percent: "67.1%" },
+                            { rank: 4, name: "Николас Джексон", percent: "66.1%" },
+                            { rank: 5, name: "Хироки Ито", percent: "64.2%" },
+                            { rank: 6, name: "Йосип Станишич", percent: "64.0%" },
+                            { rank: 7, name: "Ким Мин Джэ", percent: "54.2%" },
+                            { rank: 8, name: "Александр Павлович", percent: "30.5%" },
+                            { rank: 9, name: "Конрад Лаймер", percent: "22.3%" },
+                            { rank: 10, name: "Серж Гнабри", percent: "21.0%" }
+                        ]
+                    },
+                    {
+                        name: "БЕЗДАРЬ",
+                        color: "bad",
+                        items: [
+                            { rank: 1, name: "Саша Боэ", percent: "85.6%" },
+                            { rank: 2, name: "Том Бишоф", percent: "71.9%" },
+                            { rank: 3, name: "Рафаэл Геррейро", percent: "67.1%" },
+                            { rank: 4, name: "Николас Джексон", percent: "66.1%" },
+                            { rank: 5, name: "Хироки Ито", percent: "64.2%" },
+                            { rank: 6, name: "Йосип Станишич", percent: "64.0%" },
+                            { rank: 7, name: "Ким Мин Джэ", percent: "54.2%" },
+                            { rank: 8, name: "Александр Павлович", percent: "30.5%" },
+                            { rank: 9, name: "Конрад Лаймер", percent: "22.3%" },
+                            { rank: 10, name: "Серж Гнабри", percent: "21.0%" }
+                        ]
+                    }
+                ]
+            },
+            valorant: {
+                title: "Valorant",
+                tiers: [
+                    {
+                        name: "GOAT",
+                        color: "goat",
+                        items: [
+                            { rank: 1, name: "Boaster", percent: "92.1%" },
+                            { rank: 2, name: "TenZ", percent: "88.7%" },
+                            { rank: 3, name: "ScreaM", percent: "85.3%" }
+                        ]
+                    },
+                    {
+                        name: "ХОРОШ",
+                        color: "good",
+                        items: [
+                            { rank: 1, name: "Shroud", percent: "78.5%" },
+                            { rank: 2, name: "Jkaem", percent: "76.2%" }
+                        ]
+                    }
+                ]
+            },
+            gta: {
+                title: "GTA V",
+                tiers: [
+                    {
+                        name: "GOAT",
+                        color: "goat",
+                        items: [
+                            { rank: 1, name: "Michael De Santa", percent: "95.0%" },
+                            { rank: 2, name: "Trevor Philips", percent: "93.2%" }
+                        ]
+                    },
+                    {
+                        name: "ХОРОШ",
+                        color: "good",
+                        items: [
+                            { rank: 1, name: "Franklin Clinton", percent: "87.5%" },
+                            { rank: 2, name: "Lester Crest", percent: "75.1%" }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // Функция отображения тир-листа
+        function showTierList(gameKey) {
+            const game = tierLists[gameKey];
+            if (!game) return;
+
+            let html = `<h2 style="text-align: center; margin-bottom: 20px;">🏆 ТИР-ЛИСТ "${game.title}"</h2>`;
+
+            game.tiers.forEach(tier => {
+                html += `
+                <div class="tier-list">
+                    <div class="tier-header tier-${tier.color}">${tier.name}</div>
+                    <div class="tier-items">
+                `;
+                tier.items.forEach(item => {
+                    html += `
+                    <div class="tier-item">
+                        <div class="rank">${item.rank}</div>
+                        <div class="name">${item.name}</div>
+                        <div class="percent">${item.percent}</div>
+                    </div>
+                    `;
+                });
+                html += `
+                    </div>
+                </div>
+                `;
+            });
+
+            html += `<a href="#" class="back-btn" onclick="showGameSelector(); return false;">← К выбору игры</a>`;
+
+            document.getElementById('tierListContainer').innerHTML = html;
+        }
+
+        // Функция показа выбора игр
+        function showGameSelector() {
+            let html = `
+            <div class="game-selector" id="gameSelector">
+                <button class="game-btn" data-game="bavaria">Бавария</button>
+                <button class="game-btn" data-game="valorant">Valorant</button>
+                <button class="game-btn" data-game="gta">GTA V</button>
+            </div>
+            `;
+            document.getElementById('tierListContainer').innerHTML = html;
+
+            // Добавляем обработчики кликов
+            document.querySelectorAll('.game-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    showTierList(btn.dataset.game);
+                });
+            });
+        }
+
+        // Инициализация: показываем выбор игр
+        showGameSelector();
+    </script>
+</body>
+</html>
