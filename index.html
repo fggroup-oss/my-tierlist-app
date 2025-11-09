@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Тир-лист (by FanGames)</title>
+    <title>Тир-лист Игр</title>
     <style>
         * {
             margin: 0;
@@ -342,7 +342,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>🎮 Тир-лист (by FanGames)</h1>
+        <h1>🎮 Тир-лист Игр</h1>
     </div>
 
     <div id="app"></div>
@@ -353,163 +353,142 @@
             <div class="dev-logo">FG</div>
             <div class="dev-logo">FS</div>
         </div>
-        <div class="version">Версия 1.2</div>
+        <div class="version">Версия 1.1</div>
     </div>
 
     <script>
         const THEMES = {
             rpg: {
                 title: "Ролевые игры (RPG)",
-                img: "https://images.stopgame.ru/uploads/images/616650/form/2025/11/08/r847x474/9lKJTi2TpmKjumiKihb2AQ/838d75c187fc0e06819a307550e674f3.png",
                 hasNotPlayed: true,
                 games: [
-                    { name: "Baldur's Gate 3", img: "https://images.stopgame.ru/games/logos/19092/c280x280/M_fQ4WdH11z8X7mEYhQ81w/baldur_s_gate_iii-square.jpg", desc: "Эпическая RPG с глубокой системой боев и диалогов." },
-                    { name: "The Witcher 3", img: "https://images.stopgame.ru/games/logos/13092/c280x280/gIbFVLLpYoWmg6CXRgkmZA/witcher_3_wild_hunt-square_1.jpg", desc: "Продолжении истории Геральта." },
-                    { name: "Elden Ring", img: "https://images.stopgame.ru/games/logos/19106/c280x280/CFyjDdwT7dcOQFXqE2oO3w/elden_ring-square.jpg", desc: "От создателей Dark Souls — открытый мир и сложные боссы." },
-                    { name: "Disco Elysium", img: "https://images.stopgame.ru/games/logos/19372/c280x280/BQbDHGc7Z4xCJvJyI3bxEA/disco_elysium-square.jpg", desc: "Уникальная RPG с упором на диалоги и внутренний мир персонажа." },
-                    { name: "Cyberpunk 2077", img: "https://images.stopgame.ru/games/logos/12974/c280x280/VN0fsEicKyApforGzQPgdg/cyberpunk_2077-square_1.jpg", desc: "Будущее, киберпанк и история Ви." },
-                    { name: "Persona 5 Royal", img: "https://images.stopgame.ru/games/logos/18974/c280x280/xUeSSKFmT8t68rqfErwLbQ/persona_5_the_royal-square_1.jpg", desc: "Школьная жизнь и тайные приключения в альтернативном мире." },
-                    { name: "Mass Effect 2", img: "https://images.stopgame.ru/games/logos/10382/c280x280/E1ph5qBEErwcuCl5EJClnQ/mass_effect_2-square_1.jpg", desc: "Космическая эпопея с выбором и последствиями." },
-                    { name: "Fallout: New Vegas", img: "https://images.stopgame.ru/games/logos/10557/c280x280/mrZUClE-YeD9PWgA2GzFhw/fallout_new_vegas-square.jpg", desc: "Постапокалиптический шутер RPG с множеством концовок." },
-                    { name: "Divinity: Original Sin 2", img: "https://images.stopgame.ru/games/logos/15372/c280x280/NpMk-nc6WUMWalq3eI5Pmg/divinity_original_sin_ii-square_1.jpg", desc: "Глубокая тактическая RPG с кооперативом." },
-                    { name: "Starfield", img: "https://images.stopgame.ru/games/logos/18438/c280x280/v0ZSzAwA_LTvUSND3SEZ8A/starfield-square_1.jpg", desc: "Первая космическая RPG от Bethesda." },
-                    { name: "Dragon Age: Inquisition", img: "https://images.stopgame.ru/games/logos/12843/c280x280/sl8j3LBN7Pn553ALlGPDWQ/dragon_age_3_inquisition-square.jpg", desc: "Эпическая история о спасении мира от хаоса." },
-                    { name: "NieR: Automata", img: "https://images.stopgame.ru/games/logos/15472/c280x280/5ERhdfZQIUxPMSWoynHR_w/nier_automata-square.jpg", desc: "Философская история андроидов в постапокалиптическом мире." },
-                    { name: "Kingdom Come: Deliverance", img: "https://images.stopgame.ru/games/logos/13896/c280x280/37aFWTgRKaKRSRNuUPBVOA/kingdom_come_deliverance-square_2.jpg", desc: "Реалистичная средневековая RPG." },
-                    { name: "Pillars of Eternity", img: "https://images.stopgame.ru/games/logos/14656/c280x280/D3ayVm9h6E3ep5smcBdXUQ/pillars_of_eternity-square.jpg", desc: "Классическая RPG в духе Baldur's Gate." },
-                    { name: "Tales of Arise", img: "https://images.stopgame.ru/games/logos/20094/c280x280/FIxA6Qzt_y1pv2knjpCxqg/tales_of_arise-square.jpg", desc: "Яркая JRPG с красивой графикой и сюжетом." },
-                    { name: "Octopath Traveler", img: "https://images.stopgame.ru/games/logos/17546/c280x280/3kmDRfBSufD86l01ag7vzQ/project_octopath_traveler-square.jpg", desc: "Ретро-стиль и современные механики." },
-                    { name: "Xenoblade Chronicles", img: "https://images.stopgame.ru/games/logos/19742/c280x280/nkJbaWsfbsU82Uxs2SBc5g/xenoblade_chronicles-square.jpg", desc: "Огромный мир и захватывающий сюжет." },
-                    { name: "Genshin Impact", img: "https://images.stopgame.ru/games/logos/19973/c280x280/UnkyQPaSmKzvYE_NV4-ZRg/genshin_impact-square_1.jpg", desc: "Бесплатная RPG игра в духе серии Zelda." },
-                    { name: "Dark Souls III", img: "https://images.stopgame.ru/games/logos/15237/c280x280/p39-Ws1dVUqFg8Ul58AMkw/dark_souls_iii-square.jpg", desc: "Сложная и атмосферная RPG." },
-                    { name: "Final Fantasy VII Remake", img: "https://images.stopgame.ru/games/logos/15253/c280x280/QMeQr5bkoywqj-HMkuH5aQ/final_fantasy_vii_remake-square.jpg", desc: "Ремейк легендарной RPG." }
+                    { name: "Baldur's Gate 3", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6m6u.jpg", desc: "Эпическая RPG с глубокой системой боев и диалогов." },
+                    { name: "The Witcher 3", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1xqo.jpg", desc: "История Геральта в мире монстров и политики." },
+                    { name: "Elden Ring", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2r.jpg", desc: "От создателей Dark Souls — открытый мир и сложные боссы." },
+                    { name: "Disco Elysium", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2i9w.jpg", desc: "Уникальная RPG с фокусом на диалогах и внутреннем мире персонажа." },
+                    { name: "Cyberpunk 2077", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5q.jpg", desc: "Будущее, киберпанк и история Ви." },
+                    { name: "Persona 5 Royal", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5l.jpg", desc: "Школьная жизнь и тайные приключения в альтернативном мире." },
+                    { name: "Mass Effect 2", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5p.jpg", desc: "Космическая эпопея с выбором и последствиями." },
+                    { name: "Fallout: New Vegas", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5v.jpg", desc: "Постапокалиптический Запад с множеством концовок." },
+                    { name: "Divinity: Original Sin 2", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j1k.jpg", desc: "Глубокая тактическая RPG с кооперативом." },
+                    { name: "Starfield", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2s.jpg", desc: "Первая космическая RPG от Bethesda." },
+                    { name: "Dragon Age: Inquisition", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2z3a.jpg", desc: "Эпическая история о спасении мира от хаоса." },
+                    { name: "NieR: Automata", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5t.jpg", desc: "Философская история андроидов в постапокалиптическом мире." },
+                    { name: "Kingdom Come: Deliverance", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5m.jpg", desc: "Реалистичная средневековая RPG." },
+                    { name: "Pillars of Eternity", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5n.jpg", desc: "Классическая RPG в духе Baldur's Gate." },
+                    { name: "Tales of Arise", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5o.jpg", desc: "Яркая JRPG с красивой графикой и сюжетом." },
+                    { name: "Octopath Traveler", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5r.jpg", desc: "Ретро-стиль и современные механики." },
+                    { name: "Xenoblade Chronicles", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5u.jpg", desc: "Огромный мир и захватывающий сюжет." },
+                    { name: "Genshin Impact", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5v.jpg", desc: "Открытый мир, элементы и бесплатная игра." },
+                    { name: "Dark Souls III", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5s.jpg", desc: "Сложная и атмосферная RPG." },
+                    { name: "Final Fantasy VII Remake", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2g3t.jpg", desc: "Ремейк легендарной RPG." }
                 ]
             },
             roguelike: {
                 title: "Рогалики",
-                img: "https://images.stopgame.ru/screenshots/40492/c390x226/hr0JcgkpsA_T5CxInzuQLw/battlefield_6-12.jpg",
                 hasNotPlayed: true,
                 games: [
-                    { name: "Hades", img: "https://images.stopgame.ru/games/logos/18818/c280x280/yexZNw83XoOrRxrq9y9HWA/hades-square.jpg", desc: "Боги Олимпа помогают вам выбраться из Ада." },
-                    { name: "Dead Cells", img: "https://images.stopgame.ru/games/logos/17048/c280x280/ocF3s2ObFMkKmALWKNeX6Q/dead_cells-square.jpg", desc: "Быстрая и жестокая платформер-RPG." },
-                    { name: "Slay the Spire", img: "https://images.stopgame.ru/games/logos/18068/c280x280/rmOnYz92uUCowFPIyCo8_w/slay_the_spire-square.jpg", desc: "Карточная стратегия с рогаликовыми элементами." },
-                    { name: "Returnal", img: "https://images.stopgame.ru/games/logos/19767/c280x280/THfKkYY4C9xP1qYzD67Eag/returnal-square.jpg", desc: "Научно-фантастический шутер с петлей времени." },
-                    { name: "Risk of Rain 2", img: "https://images.stopgame.ru/games/logos/18985/c280x280/LCJjToUOPRN8ObZTcN31eA/risk_of_rain_2-square.jpg", desc: "Кооперативный шутер с прокачкой." },
-                    { name: "Spelunky 2", img: "https://images.stopgame.ru/games/logos/17742/c280x280/5IJB3rd90F9HXUOPpZsQDQ/spelunky_2-square.jpg", desc: "Классика платформеров с процедурной генерацией." },
-                    { name: "Enter the Gungeon", img: "https://images.stopgame.ru/games/logos/15591/c280x280/uesQfI0UNk2DeAYVcJTgew/enter_the_gungeon-square.jpg", desc: "Данжон-кроллер с пистолетами и боссами." },
-                    { name: "Vampire Survivors", img: "https://images.stopgame.ru/games/logos/21653/c280x280/Ws0ds2EZ6yNNLjR3JDD99A/vampire_survivors-square.jpg", desc: "Автоматическая игра, где вы просто уворачиваетесь." },
-                    { name: "The Binding of Isaac", img: "https://images.stopgame.ru/games/logos/12444/c280x280/wgYvxl8BpTDUq8neIGaNZg/binding_of_isaac_the-square.jpg", desc: "Жестокий и странный рогалик." },
-                    { name: "Rogue Legacy 2", img: "https://images.stopgame.ru/games/logos/19805/c280x280/Ia9n3cC8Ir8anNvIM9mMfQ/rogue_legacy_2-square_1.jpg", desc: "Рогалик с наследием и классами." },
-                    { name: "Wizard of Legend", img: "https://images.stopgame.ru/games/logos/18370/c280x280/yl7qChJNwgfw4j1I6lRPZA/wizard_of_legend-square_1.jpg", desc: "Магические дуэли в подземельях." }
+                    { name: "Hades", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2t.jpg", desc: "Боги Олимпа помогают вам выбраться из Ада." },
+                    { name: "Dead Cells", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5w.jpg", desc: "Быстрая и жестокая платформер-RPG." },
+                    { name: "Slay the Spire", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5x.jpg", desc: "Карточная стратегия с рогаликовыми элементами." },
+                    { name: "Returnal", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5y.jpg", desc: "Научно-фантастический шутер с петлей времени." },
+                    { name: "Risk of Rain 2", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5z.jpg", desc: "Кооперативный шутер с прокачкой." },
+                    { name: "Spelunky 2", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j60.jpg", desc: "Классика платформеров с процедурной генерацией." },
+                    { name: "Enter the Gungeon", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j61.jpg", desc: "Данжон-кроллер с пистолетами и боссами." },
+                    { name: "Vampire Survivors", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2u.jpg", desc: "Автоматическая игра, где вы просто уворачиваетесь." },
+                    { name: "The Binding of Isaac", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j62.jpg", desc: "Жестокий и странный рогалик." },
+                    { name: "Rogue Legacy 2", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2v.jpg", desc: "Рогалик с наследием и классами." },
+                    { name: "FTL: Faster Than Light", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j63.jpg", desc: "Управление кораблём в космическом рогалике." },
+                    { name: "Nuclear Blaze", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2w.jpg", desc: "Пожарный в опасном здании." },
+                    { name: "Loop Hero", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2x.jpg", desc: "Стратегия, где вы создаёте карту." },
+                    { name: "Cult of the Lamb", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2y.jpg", desc: "Рогалик с элементами стратегии и храма." },
+                    { name: "20 Minutes Till Dawn", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2z.jpg", desc: "Выживание против волн монстров." },
+                    { name: "Brotato", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n30.jpg", desc: "Рогалик с 100+ перками." },
+                    { name: "Katana ZERO", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j64.jpg", desc: "Стильный экшен с временной механикой." },
+                    { name: "Noita", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j65.jpg", desc: "Магия, физика и случайность." },
+                    { name: "NeuroVoider", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j66.jpg", desc: "Шутер с рогаликовыми элементами." },
+                    { name: "Wizard of Legend", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j67.jpg", desc: "Магические дуэли в подземельях." }
                 ]
             },
             metroidvania: {
                 title: "Метроидвании",
-                img: "https://images.stopgame.ru/uploads/images/525389/form/2025/11/08/r847x474/aZ29NV3WBB1GbMbcME3xcA/5d0c515e4b95f3eaadc879977b7cc47d.jpg",
                 hasNotPlayed: true,
                 games: [
-                    { name: "Hollow Knight", img: "https://images.stopgame.ru/games/logos/14847/c280x280/bkH0HNO-H2fMDVupehQ9PQ/hollow_knight-square.jpg", desc: "Тёмный и красивый мир насекомых." },
-                    { name: "Metroid Dread", img: "https://images.stopgame.ru/games/logos/20519/c280x280/Rh3vpP9b16b7IXrzK4YN0Q/metroid_dread-square.jpg", desc: "Возвращение Самус в классическом стиле." },
-                    { name: "Castlevania: Symphony of the Night", img: "https://images.stopgame.ru/games/logos/16063/c280x280/_AQWC_x3xq8TdMX3Nnqf9w/castlevania_symphony_of_the_night-square.jpg", desc: "Легендарная метроидвания." },
-                    { name: "Axiom Verge", img: "https://images.stopgame.ru/games/logos/12798/c280x280/RynW9MRW6ZiEwLzrcY5gdQ/axiom_verge-square.jpg", desc: "Ретро-стиль с уникальными способностями." },
-                    { name: "Blasphemous", img: "https://images.stopgame.ru/games/logos/19090/c280x280/wmHKCvMSZWKndXKWrUew0Q/blasphemous-square_1.jpg", desc: "Тёмная и жестокая метроидвания." },
-                    { name: "Grime", img: "https://images.stopgame.ru/games/logos/20784/c280x280/A8c6lNN1Vu93RP5tZ_Ye2Q/grime-square.jpg", desc: "Жестокая и мрачная." }
+                    { name: "Hollow Knight", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j68.jpg", desc: "Тёмный и красивый мир насекомых." },
+                    { name: "Metroid Dread", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n31.jpg", desc: "Возвращение Самус в классическом стиле." },
+                    { name: "Castlevania: Symphony of the Night", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j69.jpg", desc: "Легендарная метроидвания." },
+                    { name: "Axiom Verge", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6a.jpg", desc: "Ретро-стиль с уникальными способностями." },
+                    { name: "Blasphemous", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6b.jpg", desc: "Тёмная и жестокая метроидвания." },
+                    { name: "Dead Cells", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5w.jpg", desc: "Смесь метроидвании и рогалика." },
+                    { name: "Ori and the Blind Forest", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6c.jpg", desc: "Красивая и эмоциональная игра." },
+                    { name: "Celeste", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6d.jpg", desc: "Платформер с глубоким сюжетом." },
+                    { name: "Bloodstained: Ritual of the Night", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6e.jpg", desc: "Наследница Castlevania." },
+                    { name: "Ender Lilies", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n32.jpg", desc: "Грустная и красивая метроидвания." },
+                    { name: "Katana ZERO", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j64.jpg", desc: "Стильный экшен с временем." },
+                    { name: "Shadow Complex", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6f.jpg", desc: "Классическая метроидвания." },
+                    { name: "Infernax", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n33.jpg", desc: "Ретро-стиль с кровью и демонами." },
+                    { name: "Monster Boy", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6g.jpg", desc: "Цветная и весёлая метроидвания." },
+                    { name: "Unsighted", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n34.jpg", desc: "Метроидвания с таймером." },
+                    { name: "Timespinner", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6h.jpg", desc: "Время, магия и путешествия." },
+                    { name: "Dandara", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6i.jpg", desc: "Уникальное управление в метроидвании." },
+                    { name: "Aeterna Noctis", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n35.jpg", desc: "Тёмная и атмосферная." },
+                    { name: "The Messenger", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6j.jpg", desc: "Смена времени и стилей." },
+                    { name: "Grime", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n36.jpg", desc: "Жестокая и мрачная." }
                 ]
             },
             psplus: {
                 title: "Раздачи PS Plus 2025",
-                img: "https://images.stopgame.ru/screenshots/40492/c390x226/9ai_HnmAoPJz1B5W2zEi-A/battlefield_6-4.jpg",
                 hasNotPlayed: false,
                 games: [
-                    { name: "Январь 2025", img: "https://img.championat.com/i/k/k/1728488594324952447.jpg", desc: "Игры месяца — январь." },
-                    { name: "Февраль 2025", img: "https://pluggedin.ru/images/upload/1738168311.jpeg", desc: "Игры месяца — февраль." },
-                    { name: "Март 2025", img: "https://img.championat.com/i/k/k/1728488594324952447.jpg", desc: "Игры месяца — март." },
-                    { name: "Апрель 2025", img: "https://gamemag.ru/images/imagemanager/cache/57/a9b9/57a9b9_Gm-dBb3WQAAX9Xu.jpg", desc: "Игры месяца — апрель." },
-                    { name: "Май 2025", img: "https://img.championat.com/i/e/e/17460273981112226329.jpg", desc: "Игры месяца — май." },
-                    { name: "Июнь 2025", img: "https://img.championat.com/i/k/k/1728488594324952447.jpg", desc: "Игры месяца — июнь." },
-                    { name: "Июль 2025", img: "https://img.championat.com/i/k/k/1728488594324952447.jpg", desc: "Игры месяца — июль." },
-                    { name: "Август 2025", img: "https://gamemag.ru/images/imagemanager/cache/11/f8ea/11f8ea_GxCMbp1WgAA4wEf.jpg", desc: "Игры месяца — август." },
-                    { name: "Сентябрь 2025", img: "https://img.championat.com/i/q/c/17563089211574696309.jpg", desc: "Игры месяца — сентябрь." },
-                    { name: "Октябрь 2025", img: "https://img.championat.com/i/k/k/1728488594324952447.jpg", desc: "Игры месяца — октябрь." },
-                    { name: "Ноябрь 2025", img: "https://img.championat.com/i/k/k/1728488594324952447.jpg", desc: "Игры месяца — ноябрь." },
-                    { name: "Декабрь 2025", img: "https://img.championat.com/i/i/c/1755099818872962155.jpg", desc: "Игры месяца — декабрь." }
+                    { name: "Январь 2025", img: "https://via.placeholder.com/60?text=Jan", desc: "Игра месяца — январь." },
+                    { name: "Февраль 2025", img: "https://via.placeholder.com/60?text=Feb", desc: "Игра месяца — февраль." },
+                    { name: "Март 2025", img: "https://via.placeholder.com/60?text=Mar", desc: "Игра месяца — март." },
+                    { name: "Апрель 2025", img: "https://via.placeholder.com/60?text=Apr", desc: "Игра месяца — апрель." },
+                    { name: "Май 2025", img: "https://via.placeholder.com/60?text=May", desc: "Игра месяца — май." },
+                    { name: "Июнь 2025", img: "https://via.placeholder.com/60?text=Jun", desc: "Игра месяца — июнь." },
+                    { name: "Июль 2025", img: "https://via.placeholder.com/60?text=Jul", desc: "Игра месяца — июль." },
+                    { name: "Август 2025", img: "https://via.placeholder.com/60?text=Aug", desc: "Игра месяца — август." },
+                    { name: "Сентябрь 2025", img: "https://via.placeholder.com/60?text=Sep", desc: "Игра месяца — сентябрь." },
+                    { name: "Октябрь 2025", img: "https://via.placeholder.com/60?text=Oct", desc: "Игра месяца — октябрь." },
+                    { name: "Ноябрь 2025", img: "https://via.placeholder.com/60?text=Nov", desc: "Игра месяца — ноябрь." },
+                    { name: "Декабрь 2025", img: "https://via.placeholder.com/60?text=Dec", desc: "Игра месяца — декабрь." }
                 ]
             },
             awards: {
-                title: "Fan Games Awards 2025",
-                img: "https://images.stopgame.ru/screenshots/40492/c390x226/agmGWLbe9M8uuLi2tFZZig/battlefield_6-5.jpg",
+                title: "Fan Games Awards",
                 isAward: true,
                 categories: [
                     { name: "Игра года", games: [
-                        { name: "Kingdom Come: Deliverance II", img: "https://images.stopgame.ru/games/logos/31156/c280x280/hEN9LjuKdZuFOdkVgOnIXw/kingdom_come_deliverance_ii-square_3.jpg" },
-                        { name: "Clair Obscur: Expedition 33", img: "https://images.stopgame.ru/games/logos/31573/c280x280/YI8auh6q93CZK9XqpqIYeQ/clair_obscur_expedition_33-square_2.jpg" },
-                        { name: "Hollow Knight Silksong", img: "https://images.stopgame.ru/games/logos/18912/c280x280/Wz5aiEdwcimoKk4PY-QVzQ/hollow_knight_silksong-square_2.jpg" },
-                        { name: "Split Fiction", img: "https://images.stopgame.ru/games/logos/35984/c280x280/ez1Hnd1hZwWi3Bb4_7rLYA/split_fiction-square_2.jpg" },
-                        { name: "Celeste", img: "https://images.stopgame.ru/games/logos/18094/c280x280/MaM-Tn1RhMnSZwkKtjNraA/celeste-square_1.jpg" },
-                        { name: "Hollow Knight", img: "https://images.stopgame.ru/games/logos/14847/c280x280/bkH0HNO-H2fMDVupehQ9PQ/hollow_knight-square.jpg" },
-                        { name: "Dead Cells", img: "https://images.stopgame.ru/games/logos/17048/c280x280/ocF3s2ObFMkKmALWKNeX6Q/dead_cells-square.jpg" },
-                        { name: "Metroid Dread", img: "https://images.stopgame.ru/games/logos/20519/c280x280/Rh3vpP9b16b7IXrzK4YN0Q/metroid_dread-square.jpg" }
+                        { name: "Baldur's Gate 3", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6m6u.jpg" },
+                        { name: "The Witcher 3", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1xqo.jpg" },
+                        { name: "Elden Ring", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2r.jpg" },
+                        { name: "Hades", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2t.jpg" },
+                        { name: "Disco Elysium", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2i9w.jpg" },
+                        { name: "Celeste", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6d.jpg" },
+                        { name: "Hollow Knight", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j68.jpg" },
+                        { name: "Vampire Survivors", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2u.jpg" },
+                        { name: "Dead Cells", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5w.jpg" },
+                        { name: "Metroid Dread", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n31.jpg" }
                     ] },
                     { name: "Инди-игра года", games: [
-                        { name: "Sword of The Sea", img: "https://images.stopgame.ru/games/logos/27608/c280x280/ojCjNA2Qqa-T-HINX5ZHKw/sword_of_the_sea-square_1.jpg" },
-                        { name: "Hollow Knight Silksong", img: "https://images.stopgame.ru/games/logos/18912/c280x280/Wz5aiEdwcimoKk4PY-QVzQ/hollow_knight_silksong-square_2.jpg" },
-                        { name: "Blue Prince", img: "https://images.stopgame.ru/games/logos/21737/c280x280/upIcB-z3ZSRxiq0R7Ghi5w/blue_prince-square_2.jpg" },
-                        { name: "The Alters", img: "https://images.stopgame.ru/games/logos/22074/c280x280/9oSi0cyuTNxz9gFKWMrR8w/the_alters-square_2.jpg" },
-                        { name: "Dynasty Warriors: Origins", img: "https://images.stopgame.ru/games/logos/31474/c280x280/sunGJlMaqYwl38sVGN2Hog/dynasty_warriors_origins-square_1.jpg" },
-                        { name: "The Midnight Walk", img: "https://images.stopgame.ru/games/logos/33187/c280x280/R30WSds6kjXKgmNb8LSFiQ/the_midnight_walk-square.jpg" },
-                        { name: "Cronos: The New Dawn", img: "https://images.stopgame.ru/games/logos/33485/c280x280/VJPGTD3Pq7q-IUtMyHJWfw/cronos_the_new_dawn-square_1.jpg" },
-                        { name: "Dispatch", img: "https://images.stopgame.ru/games/logos/36014/c280x280/6XnfSbDPHz_qk6zOcgY_cg/dispatch-square_4.jpg" },
-                        { name: "Ball X Pit", img: "https://images.stopgame.ru/games/logos/46228/c280x280/vsL5YpN9nCbPouQGluRdwQ/ball_x_pit-square.jpg" }
+                        { name: "Celeste", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6d.jpg" },
+                        { name: "Disco Elysium", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2i9w.jpg" },
+                        { name: "Hollow Knight", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j68.jpg" },
+                        { name: "Vampire Survivors", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2u.jpg" }
                     ] },
-                    { name: "Лучший ремейк/ремастер", games: [
-                        { name: "Final Fantasy XIV", img: "https://images.stopgame.ru/games/logos/23523/c280x280/BrPmfDDJq2EUu6oEo_-cGQ/hades_2-square_1.jpg" },
-                        { name: "World of Warcraft", img: "https://images.stopgame.ru/games/logos/23523/c280x280/BrPmfDDJq2EUu6oEo_-cGQ/hades_2-square_1.jpg" },
-                        { name: "Guild Wars 2", img: "https://images.stopgame.ru/games/logos/23523/c280x280/BrPmfDDJq2EUu6oEo_-cGQ/hades_2-square_1.jpg" },
-                        { name: "Black Desert Online", img: "https://images.stopgame.ru/games/logos/23523/c280x280/BrPmfDDJq2EUu6oEo_-cGQ/hades_2-square_1.jpg" }
+                    { name: "Лучший ММО проект", games: [
+                        { name: "Final Fantasy XIV", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5r.jpg" },
+                        { name: "World of Warcraft", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5p.jpg" },
+                        { name: "Guild Wars 2", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5o.jpg" },
+                        { name: "Black Desert Online", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5n.jpg" }
                     ] },
-                    { name: "Лучший оригинальный проект", games: [
-                        { name: "Forza Horizon 5", img: "https://images.stopgame.ru/games/logos/23523/c280x280/BrPmfDDJq2EUu6oEo_-cGQ/hades_2-square_1.jpg" },
-                        { name: "Gran Turismo 7", img: "https://images.stopgame.ru/games/logos/23523/c280x280/BrPmfDDJq2EUu6oEo_-cGQ/hades_2-square_1.jpg" },
-                        { name: "Need for Speed: Heat", img: "https://images.stopgame.ru/games/logos/23523/c280x280/BrPmfDDJq2EUu6oEo_-cGQ/hades_2-square_1.jpg" },
-                        { name: "F1 23", img: "https://images.stopgame.ru/games/logos/23523/c280x280/BrPmfDDJq2EUu6oEo_-cGQ/hades_2-square_1.jpg" }
-                    ] },
-                    { name: "Лучший мультиплеер", games: [
+                    { name: "Лучшая гонка", games: [
                         { name: "Forza Horizon 5", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5m.jpg" },
                         { name: "Gran Turismo 7", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5l.jpg" },
                         { name: "Need for Speed: Heat", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5k.jpg" },
                         { name: "F1 23", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5j.jpg" }
                     ] },
-                    { name: "Лучшая игра от Microsoft на Playstation", games: [
-                        { name: "Forza Horizon 5", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5m.jpg" },
-                        { name: "Gran Turismo 7", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5l.jpg" },
-                        { name: "Need for Speed: Heat", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5k.jpg" },
-                        { name: "F1 23", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5j.jpg" }
-                    ] },
-                    { name: "Разочарование года", games: [
-                        { name: "Forza Horizon 5", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5m.jpg" },
-                        { name: "Gran Turismo 7", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5l.jpg" },
-                        { name: "Need for Speed: Heat", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5k.jpg" },
-                        { name: "F1 23", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5j.jpg" }
-                    ] },
-                    { name: "Провал года", games: [
-                        { name: "Forza Horizon 5", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5m.jpg" },
-                        { name: "Gran Turismo 7", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5l.jpg" },
-                        { name: "Need for Speed: Heat", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5k.jpg" },
-                        { name: "F1 23", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5j.jpg" }
-                    ] },
-                    { name: "Лучшее DLC 2025", games: [
-                        { name: "Forza Horizon 5", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5m.jpg" },
-                        { name: "Gran Turismo 7", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5l.jpg" },
-                        { name: "Need for Speed: Heat", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5k.jpg" },
-                        { name: "F1 23", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5j.jpg" }
-                    ] },
-                    { name: "Самая ожидаемая игра (без GTA VI)", games: [
-                        { name: "Forza Horizon 5", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5m.jpg" },
-                        { name: "Gran Turismo 7", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5l.jpg" },
-                        { name: "Need for Speed: Heat", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5k.jpg" },
-                        { name: "F1 23", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5j.jpg" }
-                    ] },
-                    { name: "Эффективный менеджер года", games: [
+                    { name: "Лучший шутер", games: [
                         { name: "Call of Duty: Modern Warfare II", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5i.jpg" },
                         { name: "Counter-Strike 2", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5h.jpg" },
                         { name: "Apex Legends", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5g.jpg" },
@@ -541,22 +520,22 @@
             document.getElementById('app').innerHTML = `
                 <div class="rules-content">
                     <h3>Как это работает?</h3>
-                    <p>Оценивай игры по системе тиров:</p>
+                    <p>Оценивайте игры по системе тиров:</p>
                     <ul>
                         <li><strong>S</strong> — Game of the Year, абсолютный фаворит</li>
                         <li><strong>A</strong> — Отличная игра, обязательно пройти</li>
                         <li><strong>B</strong> — Хорошо, но не идеально</li>
                         <li><strong>C</strong> — Терпимо, можно пропустить</li>
                         <li><strong>D</strong> — Мусор, не стоит тратить время</li>
-                        <li><strong>Не играл</strong> — Еще не играл, но не хочешь пропускать</li>
-                        <li><strong>Пропустить</strong> — Отложить оценку на потом (игра уйдет в конец списка)</li>
+                        <li><strong>Не играл</strong> — вы не играли, но не хотите пропускать</li>
+                        <li><strong>Пропустить</strong> — отложить оценку на потом (игры уйдут в конец списка)</li>
                     </ul>
-                    <p>Используй кнопку «Назад», чтобы исправить последний выбор.</p>
+                    <p>Используйте кнопку «Назад», чтобы исправить последний выбор.</p>
                     <p>Все игры должны быть оценены — пропущенные автоматически переместятся в конец.</p>
                     
                     <div class="nav-buttons" style="margin-top:30px;">
                         <button class="back-to-main-btn" onclick="showWelcome()">← На главную</button>
-                        <button class="start-btn" onclick="showThemeSelect()">Перейти к выбору тем</button>
+                        <button class="start-btn" onclick="showThemeSelect()">Перейти к выбору</button>
                     </div>
                 </div>
             `;
@@ -888,7 +867,7 @@
                 }
             });
 
-            text += `\nСобери свой тир-лист через @GameTierListBot и поделись им в любом чате.`;
+            text += `\nСобери свой тир-лист и поделись им в @GameTierListBot или любом чате.`;
 
             return text;
         }
@@ -901,7 +880,7 @@
                 text += `${awardVotes[cat]}\n\n`;
             }
 
-            text += `\nСобери свой тир-лист через @GameTierListBot и поделись им в любом чате.`;
+            text += `\nСобери свой тир-лист и поделись им в @GameTierListBot или любом чате.`;
 
             return text;
         }
@@ -910,11 +889,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
