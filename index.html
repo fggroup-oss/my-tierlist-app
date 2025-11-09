@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тир-лист: Игры и Достижения</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Тир-лист Игр</title>
     <style>
         * {
             margin: 0;
@@ -12,309 +12,539 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background: #f5f5f5;
-            padding: 10px;
+            background: #f0f2f5;
+            padding: 15px;
             max-width: 600px;
             margin: 0 auto;
         }
         .header {
             text-align: center;
-            padding: 20px;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-            color: white;
-            border-radius: 12px;
+            padding: 20px 10px;
             margin-bottom: 20px;
         }
         .header h1 {
             font-size: 24px;
-            margin-bottom: 5px;
+            color: #202020;
         }
         .header p {
+            color: #666;
             font-size: 14px;
-            opacity: 0.9;
+            margin-top: 8px;
         }
-        .game-selector {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .game-btn {
-            padding: 10px 15px;
-            background: #4CAF50;
+        .welcome {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
             color: white;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .welcome h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        .welcome p {
+            font-size: 16px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        .start-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: #fff;
+            color: #2c3e50;
             border: none;
-            border-radius: 8px;
-            cursor: pointer;
+            border-radius: 12px;
+            font-size: 18px;
             font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        .game-btn:hover {
-            background: #45a049;
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        .tier-list {
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .theme-card {
             background: white;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        .tier-header {
-            padding: 12px 20px;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        .tier-goat { background: #4CAF50; }
-        .tier-good { background: #8BC34A; }
-        .tier-norm { background: #FF9800; }
-        .tier-bad { background: #F44336; }
-        .tier-items {
-            padding: 15px;
-        }
-        .tier-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px;
-            background: #f9f9f9;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            border-left: 4px solid transparent;
-        }
-        .tier-item:nth-child(odd) {
-            background: #fff;
-        }
-        .tier-item .rank {
-            width: 30px;
-            height: 30px;
-            background: #ddd;
-            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+            padding: 20px;
+            text-align: center;
+            height: 150px;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        .theme-card:hover {
+            transform: translateY(-4px);
+        }
+        .theme-title {
             font-weight: bold;
+            font-size: 18px;
+            color: #333;
         }
-        .tier-item .name {
-            flex: 1;
-            margin-left: 10px;
-            font-size: 16px;
-        }
-        .tier-item .percent {
-            font-weight: bold;
-            font-size: 16px;
-        }
-        .back-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #3498db;
-            color: white;
-            border-radius: 8px;
-            text-decoration: none;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        .back-btn:hover {
-            background: #2980b9;
-        }
-        .footer {
+        .theme-rpg { background: #e8f5e9; } /* светло-зелёный */
+        .theme-roguelike { background: #ffe0b2; } /* светло-оранжевый */
+        .theme-metroidvania { background: #bbdefb; } /* светло-синий */
+
+        .game-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+        .game-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #333;
+        }
+        .limits {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+        .limit-box {
+            text-align: center;
+        }
+        .limit-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .limit-count {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .goty .limit-count { color: #2e7d32; }
+        .excellent .limit-count { color: #1976d2; }
+        .okay .limit-count { color: #f57c00; }
+        .trash .limit-count { color: #d32f2f; }
+
+        .categories {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .cat-btn {
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+            opacity: 0.85;
+            transition: opacity 0.2s;
+        }
+        .cat-btn:hover { opacity: 1; }
+        .cat-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .goty-btn { background: #4caf50; }
+        .excellent-btn { background: #2196f3; }
+        .okay-btn { background: #ff9800; }
+        .trash-btn { background: #f44336; }
+
+        .progress {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .result {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .result h2 {
+            margin-bottom: 15px;
+            color: #333;
+            text-align: center;
+        }
+        .result-list {
+            margin-top: 10px;
+        }
+        .result-tier {
+            margin-bottom: 15px;
+        }
+        .result-tier h3 {
+            margin-bottom: 8px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        .goty { color: #2e7d32; }
+        .excellent { color: #1976d2; }
+        .okay { color: #f57c00; }
+        .trash { color: #d32f2f; }
+
+        .result-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .action-btn {
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            color: white;
+            text-align: center;
+        }
+        .btn-theme { background: #6a5acd; }
+        .btn-retry { background: #4caf50; }
+        .btn-rating { background: #ff9800; }
+        .btn-share { background: #e91e63; }
+
+        .rating-full {
+            margin-top: 20px;
             padding: 15px;
-            font-size: 12px;
-            color: #777;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .rating-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .rating-item:last-child {
+            border-bottom: none;
+        }
+        .rating-game {
+            flex: 1;
+            font-size: 15px;
+        }
+        .rating-bar {
+            width: 100px;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            margin: 0 10px;
+            position: relative;
+        }
+        .rating-fill {
+            height: 100%;
+            border-radius: 4px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .rating-percent {
+            font-size: 14px;
+            min-width: 50px;
+            text-align: right;
+        }
+
+        .exclusive {
+            text-align: center;
+            padding: 12px;
+            background: #2c3e50;
+            color: white;
+            font-size: 14px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>🎮 Тир-лист: Игры и Достижения</h1>
-        <p>Создавайте и смотрите рейтинги игроков, персонажей, достижений</p>
+        <h1>🎮 Тир-лист Игр</h1>
     </div>
 
-    <div class="game-selector" id="gameSelector">
-        <button class="game-btn" data-game="bavaria">Бавария</button>
-        <button class="game-btn" data-game="valorant">Valorant</button>
-        <button class="game-btn" data-game="gta">GTA V</button>
-    </div>
-
-    <div id="tierListContainer">
-        <!-- Здесь будут отображаться тир-листы -->
-    </div>
-
-    <div class="footer">
-        © 2025 GameTierListBot • Создано для Telegram Mini Apps
+    <div id="app">
+        <!-- Динамическое содержимое -->
     </div>
 
     <script>
-        // Данные для тир-листов (можно добавлять свои игры)
-        const tierLists = {
-            bavaria: {
-                title: "Бавария",
-                tiers: [
-                    {
-                        name: "GOAT",
-                        color: "goat",
-                        items: [
-                            { rank: 1, name: "Харри Кейн", percent: "86.4%" },
-                            { rank: 2, name: "Майкл Олисе", percent: "38.1%" },
-                            { rank: 3, name: "Йозуа Киммих", percent: "36.3%" },
-                            { rank: 4, name: "Джамал Мусиала", percent: "17.4%" },
-                            { rank: 5, name: "Мануэль Нойер", percent: "8.0%" },
-                            { rank: 6, name: "Луис Диас", percent: "2.0%" },
-                            { rank: 7, name: "Николас Джексон", percent: "1.4%" },
-                            { rank: 8, name: "Хироки Ито", percent: "1.1%" },
-                            { rank: 9, name: "Альфонсо Дэвис", percent: "0.7%" },
-                            { rank: 10, name: "Александр Павлович", percent: "0.6%" }
-                        ]
-                    },
-                    {
-                        name: "ХОРОШ",
-                        color: "good",
-                        items: [
-                            { rank: 1, name: "Леон Горецка", percent: "62.2%" },
-                            { rank: 2, name: "Александр Павлович", percent: "59.8%" },
-                            { rank: 3, name: "Серж Гнабри", percent: "51.9%" },
-                            { rank: 4, name: "Дайо Упамекано", percent: "51.9%" },
-                            { rank: 5, name: "Конрад Лаймер", percent: "45.4%" },
-                            { rank: 6, name: "Альфонсо Дэвис", percent: "43.6%" },
-                            { rank: 7, name: "Джонатан Та", percent: "42.4%" },
-                            { rank: 8, name: "Ким Мин Джэ", percent: "41.3%" },
-                            { rank: 9, name: "Мануэль Нойер", percent: "33.4%" },
-                            { rank: 10, name: "Йосип Станишич", percent: "33.3%" }
-                        ]
-                    },
-                    {
-                        name: "НОРМ",
-                        color: "norm",
-                        items: [
-                            { rank: 1, name: "Саша Боэ", percent: "85.6%" },
-                            { rank: 2, name: "Том Бишоф", percent: "71.9%" },
-                            { rank: 3, name: "Рафаэл Геррейро", percent: "67.1%" },
-                            { rank: 4, name: "Николас Джексон", percent: "66.1%" },
-                            { rank: 5, name: "Хироки Ито", percent: "64.2%" },
-                            { rank: 6, name: "Йосип Станишич", percent: "64.0%" },
-                            { rank: 7, name: "Ким Мин Джэ", percent: "54.2%" },
-                            { rank: 8, name: "Александр Павлович", percent: "30.5%" },
-                            { rank: 9, name: "Конрад Лаймер", percent: "22.3%" },
-                            { rank: 10, name: "Серж Гнабри", percent: "21.0%" }
-                        ]
-                    },
-                    {
-                        name: "БЕЗДАРЬ",
-                        color: "bad",
-                        items: [
-                            { rank: 1, name: "Саша Боэ", percent: "85.6%" },
-                            { rank: 2, name: "Том Бишоф", percent: "71.9%" },
-                            { rank: 3, name: "Рафаэл Геррейро", percent: "67.1%" },
-                            { rank: 4, name: "Николас Джексон", percent: "66.1%" },
-                            { rank: 5, name: "Хироки Ито", percent: "64.2%" },
-                            { rank: 6, name: "Йосип Станишич", percent: "64.0%" },
-                            { rank: 7, name: "Ким Мин Джэ", percent: "54.2%" },
-                            { rank: 8, name: "Александр Павлович", percent: "30.5%" },
-                            { rank: 9, name: "Конрад Лаймер", percent: "22.3%" },
-                            { rank: 10, name: "Серж Гнабри", percent: "21.0%" }
-                        ]
-                    }
+        // === ДАННЫЕ ПО ТЕМАМ ===
+        const THEMES = {
+            rpg: {
+                title: "🎲 Ролевые игры (RPG)",
+                games: [
+                    "The Witcher 3", "Baldur's Gate 3", "Divinity: Original Sin 2",
+                    "Disco Elysium", "Final Fantasy VII Remake", "Elden Ring",
+                    "Dragon Age: Inquisition", "Fallout: New Vegas", "Mass Effect 2",
+                    "Persona 5 Royal", "Cyberpunk 2077", "Kingdom Come: Deliverance",
+                    "Pillars of Eternity", "Tales of Arise", "Octopath Traveler",
+                    "Starfield", "Dark Souls III", "NieR: Automata", "Xenoblade Chronicles",
+                    "Genshin Impact"
                 ]
             },
-            valorant: {
-                title: "Valorant",
-                tiers: [
-                    {
-                        name: "GOAT",
-                        color: "goat",
-                        items: [
-                            { rank: 1, name: "Boaster", percent: "92.1%" },
-                            { rank: 2, name: "TenZ", percent: "88.7%" },
-                            { rank: 3, name: "ScreaM", percent: "85.3%" }
-                        ]
-                    },
-                    {
-                        name: "ХОРОШ",
-                        color: "good",
-                        items: [
-                            { rank: 1, name: "Shroud", percent: "78.5%" },
-                            { rank: 2, name: "Jkaem", percent: "76.2%" }
-                        ]
-                    }
+            roguelike: {
+                title: "🔥 Рогалики",
+                games: [
+                    "Hades", "Dead Cells", "Slay the Spire", "Returnal",
+                    "Risk of Rain 2", "Spelunky 2", "Enter the Gungeon",
+                    "Vampire Survivors", "The Binding of Isaac", "Rogue Legacy 2",
+                    "FTL: Faster Than Light", "Nuclear Blaze", "Loop Hero",
+                    "Cult of the Lamb", "20 Minutes Till Dawn", "Brotato",
+                    "Katana ZERO", "Noita", "NeuroVoider", "Wizard of Legend"
                 ]
             },
-            gta: {
-                title: "GTA V",
-                tiers: [
-                    {
-                        name: "GOAT",
-                        color: "goat",
-                        items: [
-                            { rank: 1, name: "Michael De Santa", percent: "95.0%" },
-                            { rank: 2, name: "Trevor Philips", percent: "93.2%" }
-                        ]
-                    },
-                    {
-                        name: "ХОРОШ",
-                        color: "good",
-                        items: [
-                            { rank: 1, name: "Franklin Clinton", percent: "87.5%" },
-                            { rank: 2, name: "Lester Crest", percent: "75.1%" }
-                        ]
-                    }
+            metroidvania: {
+                title: "🕳️ Метроидвании",
+                games: [
+                    "Hollow Knight", "Metroid Dread", "Castlevania: Symphony of the Night",
+                    "Axiom Verge", "Blasphemous", "Dead Cells", "Ori and the Blind Forest",
+                    "Celeste", "Bloodstained: Ritual of the Night", "Ender Lilies",
+                    "Katana ZERO", "Shadow Complex", "Infernax", "Monster Boy",
+                    "Unsighted", "Timespinner", "Dandara", "Aeterna Noctis",
+                    "The Messenger", "Grime"
                 ]
             }
         };
 
-        // Функция отображения тир-листа
-        function showTierList(gameKey) {
-            const game = tierLists[gameKey];
-            if (!game) return;
+        const LIMITS = { goty: 2, excellent: 6, okay: 6, trash: 6 };
 
-            let html = `<h2 style="text-align: center; margin-bottom: 20px;">🏆 ТИР-ЛИСТ "${game.title}"</h2>`;
+        // === СОСТОЯНИЕ ===
+        let currentTheme = null;
+        let assigned = { goty: [], excellent: [], okay: [], trash: [] };
+        let currentIndex = 0;
 
-            game.tiers.forEach(tier => {
+        // === ЭКРАНЫ ===
+        function showWelcome() {
+            const html = `
+                <div class="welcome fade-in">
+                    <h2>👋 Привет, геймер!</h2>
+                    <p>Создай свой тир-лист по любимым играм. Оцени 20 игр по категориям с лимитами.</p>
+                    <button class="start-btn" onclick="showThemeSelect()">Начать →</button>
+                </div>
+                <div class="exclusive">Эксклюзив сообщества Fan Games</div>
+            `;
+            document.getElementById('app').innerHTML = html;
+        }
+
+        function showThemeSelect() {
+            let html = `<h2 style="text-align:center; margin-bottom:20px;">Выбери тему:</h2>`;
+            html += `<div class="theme-grid">`;
+
+            for (const [key, theme] of Object.entries(THEMES)) {
+                const className = `theme-${key}`;
                 html += `
-                <div class="tier-list">
-                    <div class="tier-header tier-${tier.color}">${tier.name}</div>
-                    <div class="tier-items">
-                `;
-                tier.items.forEach(item => {
-                    html += `
-                    <div class="tier-item">
-                        <div class="rank">${item.rank}</div>
-                        <div class="name">${item.name}</div>
-                        <div class="percent">${item.percent}</div>
+                    <div class="theme-card ${className}" onclick="startTheme('${key}')">
+                        <div class="theme-title">${theme.title}</div>
                     </div>
-                    `;
-                });
-                html += `
+                `;
+            }
+
+            html += `</div><div class="exclusive">Эксклюзив сообщества Fan Games</div>`;
+            document.getElementById('app').innerHTML = html;
+        }
+
+        function startTheme(themeKey) {
+            currentTheme = themeKey;
+            assigned = { goty: [], excellent: [], okay: [], trash: [] };
+            currentIndex = 0;
+            renderGameScreen();
+        }
+
+        function updateLimitsUI() {
+            const used = {
+                goty: assigned.goty.length,
+                excellent: assigned.excellent.length,
+                okay: assigned.okay.length,
+                trash: assigned.trash.length
+            };
+            const limitsHTML = `
+                <div class="limits">
+                    <div class="limit-box goty">
+                        <div class="limit-title">GOTY</div>
+                        <div class="limit-count">${used.goty}/${LIMITS.goty}</div>
+                    </div>
+                    <div class="limit-box excellent">
+                        <div class="limit-title">Отлично</div>
+                        <div class="limit-count">${used.excellent}/${LIMITS.excellent}</div>
+                    </div>
+                    <div class="limit-box okay">
+                        <div class="limit-title">Терпимо</div>
+                        <div class="limit-count">${used.okay}/${LIMITS.okay}</div>
+                    </div>
+                    <div class="limit-box trash">
+                        <div class="limit-title">Мусор</div>
+                        <div class="limit-count">${used.trash}/${LIMITS.trash}</div>
                     </div>
                 </div>
-                `;
-            });
-
-            html += `<a href="#" class="back-btn" onclick="showGameSelector(); return false;">← К выбору игры</a>`;
-
-            document.getElementById('tierListContainer').innerHTML = html;
+            `;
+            document.querySelector('#limits-container').innerHTML = limitsHTML;
         }
 
-        // Функция показа выбора игр
-        function showGameSelector() {
-            let html = `
-            <div class="game-selector" id="gameSelector">
-                <button class="game-btn" data-game="bavaria">Бавария</button>
-                <button class="game-btn" data-game="valorant">Valorant</button>
-                <button class="game-btn" data-game="gta">GTA V</button>
+        function renderGameScreen() {
+            if (!currentTheme || currentIndex >= THEMES[currentTheme].games.length) {
+                renderResults();
+                return;
+            }
+
+            const gameList = THEMES[currentTheme].games;
+            const game = gameList[currentIndex];
+            const used = {
+                goty: assigned.goty.length,
+                excellent: assigned.excellent.length,
+                okay: assigned.okay.length,
+                trash: assigned.trash.length
+            };
+
+            const btnDisabled = {
+                goty: used.goty >= LIMITS.goty,
+                excellent: used.excellent >= LIMITS.excellent,
+                okay: used.okay >= LIMITS.okay,
+                trash: used.trash >= LIMITS.trash
+            };
+
+            const html = `
+                <div class="progress">${THEMES[currentTheme].title}</div>
+                <div class="progress">Игра ${currentIndex + 1} из ${gameList.length}</div>
+                <div class="game-card">
+                    <div class="game-name">${game}</div>
+                    <div id="limits-container"></div>
+                    <div class="categories">
+                        <button class="cat-btn goty-btn" ${btnDisabled.goty ? 'disabled' : ''} onclick="assignCategory('goty')">
+                            GOTY
+                        </button>
+                        <button class="cat-btn excellent-btn" ${btnDisabled.excellent ? 'disabled' : ''} onclick="assignCategory('excellent')">
+                            Отлично
+                        </button>
+                        <button class="cat-btn okay-btn" ${btnDisabled.okay ? 'disabled' : ''} onclick="assignCategory('okay')">
+                            Терпимо
+                        </button>
+                        <button class="cat-btn trash-btn" ${btnDisabled.trash ? 'disabled' : ''} onclick="assignCategory('trash')">
+                            Мусор
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('app').innerHTML = html;
+            updateLimitsUI();
+        }
+
+        function assignCategory(category) {
+            const gameList = THEMES[currentTheme].games;
+            assigned[category].push(gameList[currentIndex]);
+            currentIndex++;
+            renderGameScreen();
+        }
+
+        function renderResults() {
+            const themeTitle = THEMES[currentTheme].title;
+            let resultHTML = `
+                <div class="result">
+                    <h2>✅ Готово!</h2>
+                    <p style="text-align:center; margin-bottom:15px;"><em>${themeTitle}</em></p>
+            `;
+
+            const tiers = [
+                { key: 'goty', title: '🏆 GOTY', class: 'goty' },
+                { key: 'excellent', title: '🌟 Отлично', class: 'excellent' },
+                { key: 'okay', title: '😐 Терпимо', class: 'okay' },
+                { key: 'trash', title: '🗑️ Мусор', class: 'trash' }
+            ];
+
+            tiers.forEach(tier => {
+                if (assigned[tier.key].length > 0) {
+                    resultHTML += `
+                        <div class="result-tier">
+                            <h3 class="${tier.class}">${tier.title}</h3>
+                            <ul class="result-list">
+                                ${assigned[tier.key].map(game => `<li>${game}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+            });
+
+            resultHTML += `
+                <div class="result-actions">
+                    <button class="action-btn btn-theme" onclick="showThemeSelect()">Другая тема</button>
+                    <button class="action-btn btn-retry" onclick="startTheme('${currentTheme}')">Пересоздать</button>
+                    <button class="action-btn btn-rating" onclick="showRating()">Рейтинг игроков</button>
+                    <button class="action-btn btn-share" onclick="shareResult()">Поделиться</button>
+                </div>
+                <div class="exclusive">Эксклюзив сообщества Fan Games</div>
             </div>
             `;
-            document.getElementById('tierListContainer').innerHTML = html;
 
-            // Добавляем обработчики кликов
-            document.querySelectorAll('.game-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    showTierList(btn.dataset.game);
-                });
-            });
+            document.getElementById('app').innerHTML = resultHTML;
         }
 
-        // Инициализация: показываем выбор игр
-        showGameSelector();
+        function showRating() {
+            const themeGames = THEMES[currentTheme].games;
+            const html = `
+                <div class="result">
+                    <h2>👥 Общий рейтинг игроков</h2>
+                    <p style="text-align:center; margin-bottom:15px;"><em>${THEMES[currentTheme].title}</em></p>
+                    <div class="rating-full">
+                        ${themeGames.map((game, idx) => {
+                            const percent = Math.floor(Math.random() * 100);
+                            const color = percent > 70 ? '#4caf50' : percent > 40 ? '#ff9800' : '#f44336';
+                            return `
+                                <div class="rating-item">
+                                    <div class="rating-game">${game}</div>
+                                    <div class="rating-bar">
+                                        <div class="rating-fill" style="width: ${percent}%; background: ${color};"></div>
+                                    </div>
+                                    <div class="rating-percent">${percent}%</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    <button class="theme-btn" onclick="renderResults()">← Назад</button>
+                    <div class="exclusive">Эксклюзив сообщества Fan Games</div>
+                </div>
+            `;
+            document.getElementById('app').innerHTML = html;
+        }
+
+        function shareResult() {
+            const text = `🎮 Я создал тир-лист по теме "${THEMES[currentTheme].title}"!\nПройди и ты: ${window.location.href}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Мой тир-лист игр',
+                    text: text
+                }).catch(console.error);
+            } else {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Ссылка скопирована! Отправь её в Telegram.');
+                });
+            }
+        }
+
+        // === СТАРТ ===
+        showWelcome();
     </script>
 </body>
 </html>
