@@ -33,7 +33,7 @@
             border-radius: 15px;
             margin-bottom: 25px;
         }
-        .start-btn {
+        .start-btn, .rules-btn {
             display: block;
             width: 100%;
             padding: 16px;
@@ -44,6 +44,7 @@
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
+            margin-bottom: 12px;
         }
         .theme-grid {
             display: grid;
@@ -83,26 +84,70 @@
             background: white;
             border-radius: 12px;
             padding: 20px;
-            text-align: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             margin-bottom: 20px;
+        }
+        .game-header {
+            text-align: center;
+            margin-bottom: 15px;
         }
         .game-img {
             width: 80px;
             height: 80px;
-            background: #eee;
             border-radius: 8px;
             margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #777;
-            font-size: 12px;
+            object-fit: cover;
         }
         .game-name {
             font-size: 20px;
             font-weight: bold;
             margin: 10px 0;
+        }
+        .game-desc {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        .categories {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .cat-btn {
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+            opacity: 0.85;
+        }
+        .cat-btn:hover { opacity: 1; }
+        .s-btn { background: #4caf50; } /* S */
+        .a-btn { background: #8bc34a; } /* A */
+        .b-btn { background: #ff9800; } /* B */
+        .c-btn { background: #ffcc80; } /* C */
+        .d-btn { background: #f44336; } /* D */
+        .not-played-btn { background: #757575; } /* Не играл */
+        .skip-btn { background: #9e9e9e; } /* Пропустить */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .back-btn, .back-to-main-btn {
+            padding: 10px 15px;
+            background: #9e9e9e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
         }
         .tier-list {
             background: white;
@@ -117,10 +162,11 @@
             font-weight: bold;
             font-size: 18px;
         }
-        .tier-goat { background: #4CAF50; }
-        .tier-good { background: #8BC34A; }
-        .tier-norm { background: #FF9800; }
-        .tier-bad { background: #F44336; }
+        .tier-s { background: #4CAF50; }
+        .tier-a { background: #8BC34A; }
+        .tier-b { background: #FF9800; }
+        .tier-c { background: #FFCC80; }
+        .tier-d { background: #F44336; }
         .tier-items {
             padding: 15px;
         }
@@ -132,20 +178,6 @@
             background: #f9f9f9;
             margin-bottom: 8px;
             border-radius: 8px;
-        }
-        .rating-bar {
-            width: 100px;
-            height: 8px;
-            background: #eee;
-            border-radius: 4px;
-            position: relative;
-        }
-        .rating-fill {
-            height: 100%;
-            border-radius: 4px;
-            position: absolute;
-            left: 0;
-            top: 0;
         }
         .result-actions {
             display: grid;
@@ -167,51 +199,120 @@
         .btn-retry { background: #4caf50; }
         .btn-rating { background: #ff9800; }
         .btn-share { background: #e91e63; }
-        .exclusive {
+        .rules-content {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .rules-content h3 {
+            margin: 15px 0 10px;
+        }
+        .rules-content ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        .rules-content li {
+            margin-bottom: 8px;
+        }
+        .copyright {
             text-align: center;
-            padding: 12px;
-            background: #2c3e50;
-            color: white;
-            font-size: 14px;
-            border-radius: 8px;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-        .categories {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 20px;
-        }
-        .cat-btn {
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            color: white;
-            opacity: 0.85;
-        }
-        .cat-btn:hover { opacity: 1; }
-        .cat-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-        .goty-btn { background: #4caf50; }
-        .excellent-btn { background: #2196f3; }
-        .okay-btn { background: #ff9800; }
-        .trash-btn { background: #f44336; }
-        .limits {
-            display: flex;
-            justify-content: space-around;
-            margin: 15px 0;
+            margin-top: 30px;
             font-size: 13px;
+            color: #666;
         }
-        .limit-box { text-align: center; }
-        .limit-title { font-weight: bold; margin-bottom: 3px; }
-        .limit-count { font-size: 16px; font-weight: bold; }
-        .progress { text-align: center; margin: 15px 0; }
+        .dev-logos {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .dev-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #555;
+        }
+        .version {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+        .progress {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* === ИСПРАВЛЕНИЯ ДЛЯ AWARDS === */
+        .awards-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .award-question {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .award-games {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            overflow-y: auto;
+            max-height: 400px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        .award-game {
+            background: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .award-game:hover {
+            background: #e0e0e0;
+        }
+        .award-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 6px;
+            margin: 0 auto 10px;
+            object-fit: cover;
+        }
+        .award-game-name {
+            font-size: 14px;
+            word-wrap: break-word;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 480px) {
+            .game-img { width: 60px; height: 60px; }
+            .game-name { font-size: 18px; }
+            .cat-btn { font-size: 14px; padding: 12px; }
+            .award-games {
+                grid-template-columns: 1fr;
+                max-height: 300px;
+            }
+            .award-img { width: 50px; height: 50px; }
+            .award-game-name { font-size: 13px; }
+        }
     </style>
 </head>
 <body>
@@ -221,81 +322,197 @@
 
     <div id="app"></div>
 
+    <div class="copyright">
+        Разработано для FanGames
+        <div class="dev-logos">
+            <div class="dev-logo">FG</div>
+            <div class="dev-logo">FS</div>
+        </div>
+        <div class="version">Версия 1.1</div>
+    </div>
+
     <script>
-        // === НАСТРОЙКИ ТИР-ЛИСТОВ ===
         const THEMES = {
-            metroidvania: {
-                title: "Метроидвании",
-                img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/best-metroidvanias-nintendo-switch-11.jpg",
-                // ЛИМИТЫ — менять можно здесь!
-                limits: { goty: 1, excellent: 5, okay: 7, trash: 7 },
-                games: [
-                    { name: "Hollow Knight", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/hollow_knight-square.png" },
-                    { name: "Metroid Dread", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/metroid_dread-square.png" },
-                    { name: "Blasphemous", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/blasphemous-square_1.jpg" },
-                    { name: "Celeste", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/celeste-square_1.jpg" },
-                    { name: "Dead Cells", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/dead_cells-square.jpg" },
-                    { name: "Ori and the Blind Forest", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/ori_and_the_blind_forest-square_1.jpg" },
-                    { name: "Katana ZERO", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/katana_zero-square_1.jpg" },
-                    { name: "The Messenger", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/messenger-square.png" },
-                    { name: "Axiom Verge", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/axiom_verge-square.jpg" },
-                    { name: "Castlevania: SotN", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/castlevania_symphony_of_the_night-square.png" },
-                    { name: "Grime", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/grime-square.jpg" },
-                    { name: "Ender Lilies", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/ender_lilies_quietus_of_the_knights-square.jpg" },
-                    { name: "Infernax", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/infernax-square_1.jpg" },
-                    { name: "Dandara", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/dandara-square.png" },
-                    { name: "Unsighted", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/unsighted-square.jpg" },
-                    { name: "Timespinner", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/timespinner-square.png" },
-                    { name: "Monster Boy", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/monster_boy_and_the_cursed_kingdom-square.jpg" },
-                    { name: "Shadow Complex", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/shadow_complex-square.jpg" },
-                    { name: "Aeterna Noctis", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/aeterna_noctis-square.jpg" },
-                    { name: "Bloodstained", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/bloodstained_ritual_of_the_night-square.jpg" }
-                ]
-            },
             rpg: {
                 title: "Ролевые игры (RPG)",
-                img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/obsidian-games-1920x1080.jpg",
-                limits: { goty: 2, excellent: 6, okay: 6, trash: 6 },
+                hasNotPlayed: true,
                 games: [
-                    { name: "The Witcher 3", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/witcher_3_wild_hunt-square_1.png" },
-                    { name: "Baldur's Gate 3", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/baldur_s_gate_iii-square.jpg" },
-                    { name: "Elden Ring", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/elden_ring-square.jpg" },
-                    { name: "Disco Elysium", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/disco_elysium-square.png" },
-                    { name: "Cyberpunk 2077", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/cyberpunk_2077-square_1.jpg" },
-                    { name: "Persona 5 Royal", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/persona_5_the_royal-square_1.jpg" },
-                    { name: "Mass Effect 2", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/mass_effect_2-square_1.jpg" },
-                    { name: "Fallout: NV", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/fallout_new_vegas-square.jpg" },
-                    { name: "Divinity: OS2", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/divinity_original_sin_ii-square_1.jpg" },
-                    { name: "Xenoblade", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/xenoblade_chronicles-square.png" },
-                    { name: "Final Fantasy VII", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/final_fantasy_7-square_2.jpg" },
-                    { name: "Dragon Age: Inq", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/dragon_age_3_inquisition-square.jpg" },
-                    { name: "Genshin Impact", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/genshin_impact-square_1.jpg" },
-                    { name: "Starfield", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/starfield-square_1.jpg" },
-                    { name: "Kingdom Come", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/kingdom_come_deliverance-square_2.png" },
-                    { name: "NieR: Automata", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/nier_automata-square.jpg" },
-                    { name: "Tales of Arise", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/tales_of_arise-square.png" },
-                    { name: "Octopath Traveler", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/project_octopath_traveler-square.png" },
-                    { name: "Pillars of Eternity", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/pillars_of_eternity-square.jpg" },
-                    { name: "Dark Souls III", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/dark_souls_iii-square.jpg" }
+                    { name: "Baldur's Gate 3", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6m6u.jpg", desc: "Эпическая RPG с глубокой системой боев и диалогов." },
+                    { name: "The Witcher 3", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1xqo.jpg", desc: "История Геральта в мире монстров и политики." },
+                    { name: "Elden Ring", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2r.jpg", desc: "От создателей Dark Souls — открытый мир и сложные боссы." },
+                    { name: "Disco Elysium", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2i9w.jpg", desc: "Уникальная RPG с фокусом на диалогах и внутреннем мире персонажа." },
+                    { name: "Cyberpunk 2077", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5q.jpg", desc: "Будущее, киберпанк и история Ви." },
+                    { name: "Persona 5 Royal", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5l.jpg", desc: "Школьная жизнь и тайные приключения в альтернативном мире." },
+                    { name: "Mass Effect 2", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5p.jpg", desc: "Космическая эпопея с выбором и последствиями." },
+                    { name: "Fallout: New Vegas", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5v.jpg", desc: "Постапокалиптический Запад с множеством концовок." },
+                    { name: "Divinity: Original Sin 2", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j1k.jpg", desc: "Глубокая тактическая RPG с кооперативом." },
+                    { name: "Starfield", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2s.jpg", desc: "Первая космическая RPG от Bethesda." },
+                    { name: "Dragon Age: Inquisition", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2z3a.jpg", desc: "Эпическая история о спасении мира от хаоса." },
+                    { name: "NieR: Automata", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5t.jpg", desc: "Философская история андроидов в постапокалиптическом мире." },
+                    { name: "Kingdom Come: Deliverance", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5m.jpg", desc: "Реалистичная средневековая RPG." },
+                    { name: "Pillars of Eternity", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5n.jpg", desc: "Классическая RPG в духе Baldur's Gate." },
+                    { name: "Tales of Arise", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5o.jpg", desc: "Яркая JRPG с красивой графикой и сюжетом." },
+                    { name: "Octopath Traveler", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5r.jpg", desc: "Ретро-стиль и современные механики." },
+                    { name: "Xenoblade Chronicles", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5u.jpg", desc: "Огромный мир и захватывающий сюжет." },
+                    { name: "Genshin Impact", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5v.jpg", desc: "Открытый мир, элементы и бесплатная игра." },
+                    { name: "Dark Souls III", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5s.jpg", desc: "Сложная и атмосферная RPG." },
+                    { name: "Final Fantasy VII Remake", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2g3t.jpg", desc: "Ремейк легендарной RPG." }
+                ]
+            },
+            roguelike: {
+                title: "Рогалики",
+                hasNotPlayed: true,
+                games: [
+                    { name: "Hades", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2t.jpg", desc: "Боги Олимпа помогают вам выбраться из Ада." },
+                    { name: "Dead Cells", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5w.jpg", desc: "Быстрая и жестокая платформер-RPG." },
+                    { name: "Slay the Spire", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5x.jpg", desc: "Карточная стратегия с рогаликовыми элементами." },
+                    { name: "Returnal", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5y.jpg", desc: "Научно-фантастический шутер с петлей времени." },
+                    { name: "Risk of Rain 2", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5z.jpg", desc: "Кооперативный шутер с прокачкой." },
+                    { name: "Spelunky 2", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j60.jpg", desc: "Классика платформеров с процедурной генерацией." },
+                    { name: "Enter the Gungeon", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j61.jpg", desc: "Данжон-кроллер с пистолетами и боссами." },
+                    { name: "Vampire Survivors", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2u.jpg", desc: "Автоматическая игра, где вы просто уворачиваетесь." },
+                    { name: "The Binding of Isaac", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j62.jpg", desc: "Жестокий и странный рогалик." },
+                    { name: "Rogue Legacy 2", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2v.jpg", desc: "Рогалик с наследием и классами." },
+                    { name: "FTL: Faster Than Light", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j63.jpg", desc: "Управление кораблём в космическом рогалике." },
+                    { name: "Nuclear Blaze", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2w.jpg", desc: "Пожарный в опасном здании." },
+                    { name: "Loop Hero", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2x.jpg", desc: "Стратегия, где вы создаёте карту." },
+                    { name: "Cult of the Lamb", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2y.jpg", desc: "Рогалик с элементами стратегии и храма." },
+                    { name: "20 Minutes Till Dawn", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2z.jpg", desc: "Выживание против волн монстров." },
+                    { name: "Brotato", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n30.jpg", desc: "Рогалик с 100+ перками." },
+                    { name: "Katana ZERO", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j64.jpg", desc: "Стильный экшен с временной механикой." },
+                    { name: "Noita", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j65.jpg", desc: "Магия, физика и случайность." },
+                    { name: "NeuroVoider", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j66.jpg", desc: "Шутер с рогаликовыми элементами." },
+                    { name: "Wizard of Legend", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j67.jpg", desc: "Магические дуэли в подземельях." }
+                ]
+            },
+            metroidvania: {
+                title: "Метроидвании",
+                hasNotPlayed: true,
+                games: [
+                    { name: "Hollow Knight", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j68.jpg", desc: "Тёмный и красивый мир насекомых." },
+                    { name: "Metroid Dread", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n31.jpg", desc: "Возвращение Самус в классическом стиле." },
+                    { name: "Castlevania: Symphony of the Night", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j69.jpg", desc: "Легендарная метроидвания." },
+                    { name: "Axiom Verge", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6a.jpg", desc: "Ретро-стиль с уникальными способностями." },
+                    { name: "Blasphemous", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6b.jpg", desc: "Тёмная и жестокая метроидвания." },
+                    { name: "Dead Cells", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5w.jpg", desc: "Смесь метроидвании и рогалика." },
+                    { name: "Ori and the Blind Forest", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6c.jpg", desc: "Красивая и эмоциональная игра." },
+                    { name: "Celeste", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6d.jpg", desc: "Платформер с глубоким сюжетом." },
+                    { name: "Bloodstained: Ritual of the Night", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6e.jpg", desc: "Наследница Castlevania." },
+                    { name: "Ender Lilies", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n32.jpg", desc: "Грустная и красивая метроидвания." },
+                    { name: "Katana ZERO", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j64.jpg", desc: "Стильный экшен с временем." },
+                    { name: "Shadow Complex", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6f.jpg", desc: "Классическая метроидвания." },
+                    { name: "Infernax", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n33.jpg", desc: "Ретро-стиль с кровью и демонами." },
+                    { name: "Monster Boy", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6g.jpg", desc: "Цветная и весёлая метроидвания." },
+                    { name: "Unsighted", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n34.jpg", desc: "Метроидвания с таймером." },
+                    { name: "Timespinner", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6h.jpg", desc: "Время, магия и путешествия." },
+                    { name: "Dandara", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6i.jpg", desc: "Уникальное управление в метроидвании." },
+                    { name: "Aeterna Noctis", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n35.jpg", desc: "Тёмная и атмосферная." },
+                    { name: "The Messenger", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6j.jpg", desc: "Смена времени и стилей." },
+                    { name: "Grime", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n36.jpg", desc: "Жестокая и мрачная." }
+                ]
+            },
+            psplus: {
+                title: "Раздачи PS Plus 2025",
+                hasNotPlayed: false,
+                games: [
+                    { name: "Январь 2025", img: "https://via.placeholder.com/60?text=Jan", desc: "Игра месяца — январь." },
+                    { name: "Февраль 2025", img: "https://via.placeholder.com/60?text=Feb", desc: "Игра месяца — февраль." },
+                    { name: "Март 2025", img: "https://via.placeholder.com/60?text=Mar", desc: "Игра месяца — март." },
+                    { name: "Апрель 2025", img: "https://via.placeholder.com/60?text=Apr", desc: "Игра месяца — апрель." },
+                    { name: "Май 2025", img: "https://via.placeholder.com/60?text=May", desc: "Игра месяца — май." },
+                    { name: "Июнь 2025", img: "https://via.placeholder.com/60?text=Jun", desc: "Игра месяца — июнь." },
+                    { name: "Июль 2025", img: "https://via.placeholder.com/60?text=Jul", desc: "Игра месяца — июль." },
+                    { name: "Август 2025", img: "https://via.placeholder.com/60?text=Aug", desc: "Игра месяца — август." },
+                    { name: "Сентябрь 2025", img: "https://via.placeholder.com/60?text=Sep", desc: "Игра месяца — сентябрь." },
+                    { name: "Октябрь 2025", img: "https://via.placeholder.com/60?text=Oct", desc: "Игра месяца — октябрь." },
+                    { name: "Ноябрь 2025", img: "https://via.placeholder.com/60?text=Nov", desc: "Игра месяца — ноябрь." },
+                    { name: "Декабрь 2025", img: "https://via.placeholder.com/60?text=Dec", desc: "Игра месяца — декабрь." }
+                ]
+            },
+            awards: {
+                title: "Fan Games Awards",
+                isAward: true,
+                categories: [
+                    { name: "Игра года", games: [
+                        { name: "Baldur's Gate 3", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6m6u.jpg" },
+                        { name: "The Witcher 3", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1xqo.jpg" },
+                        { name: "Elden Ring", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2r.jpg" },
+                        { name: "Hades", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2t.jpg" },
+                        { name: "Disco Elysium", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2i9w.jpg" },
+                        { name: "Celeste", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6d.jpg" },
+                        { name: "Hollow Knight", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j68.jpg" },
+                        { name: "Vampire Survivors", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2u.jpg" },
+                        { name: "Dead Cells", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5w.jpg" },
+                        { name: "Metroid Dread", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n31.jpg" }
+                    ] },
+                    { name: "Инди-игра года", games: [
+                        { name: "Celeste", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6d.jpg" },
+                        { name: "Disco Elysium", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2i9w.jpg" },
+                        { name: "Hollow Knight", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j68.jpg" },
+                        { name: "Vampire Survivors", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2u.jpg" }
+                    ] },
+                    { name: "Лучший ММО проект", games: [
+                        { name: "Final Fantasy XIV", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5r.jpg" },
+                        { name: "World of Warcraft", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5p.jpg" },
+                        { name: "Guild Wars 2", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5o.jpg" },
+                        { name: "Black Desert Online", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5n.jpg" }
+                    ] },
+                    { name: "Лучшая гонка", games: [
+                        { name: "Forza Horizon 5", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5m.jpg" },
+                        { name: "Gran Turismo 7", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5l.jpg" },
+                        { name: "Need for Speed: Heat", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5k.jpg" },
+                        { name: "F1 23", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5j.jpg" }
+                    ] },
+                    { name: "Лучший шутер", games: [
+                        { name: "Call of Duty: Modern Warfare II", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5i.jpg" },
+                        { name: "Counter-Strike 2", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5h.jpg" },
+                        { name: "Apex Legends", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5g.jpg" },
+                        { name: "Halo Infinite", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5f.jpg" }
+                    ] }
                 ]
             }
-            // Можно добавить ещё темы
         };
 
-        // === СОСТОЯНИЕ ===
         let currentThemeKey = null;
-        let assigned = { goty: [], excellent: [], okay: [], trash: [] };
+        let gamesToVote = [];
         let currentIndex = 0;
+        let assigned = { s: [], a: [], b: [], c: [], d: [], 'not-played': [] };
+        let awardCategoryIndex = 0;
+        let awardVotes = {};
 
-        // === ЭКРАНЫ ===
         function showWelcome() {
             document.getElementById('app').innerHTML = `
                 <div class="welcome">
                     <h2>👋 Привет, геймер!</h2>
                     <p>Создай свой тир-лист по любимым играм</p>
                     <button class="start-btn" onclick="showThemeSelect()">Начать →</button>
+                    <button class="rules-btn" onclick="showRules()">📜 Правила</button>
                 </div>
-                <div class="exclusive">Эксклюзив сообщества Fan Games</div>
+            `;
+        }
+
+        function showRules() {
+            document.getElementById('app').innerHTML = `
+                <div class="rules-content">
+                    <h3>Как это работает?</h3>
+                    <p>Оценивайте игры по системе тиров:</p>
+                    <ul>
+                        <li><strong>S</strong> — Game of the Year, абсолютный фаворит</li>
+                        <li><strong>A</strong> — Отличная игра, обязательно пройти</li>
+                        <li><strong>B</strong> — Хорошо, но не идеально</li>
+                        <li><strong>C</strong> — Терпимо, можно пропустить</li>
+                        <li><strong>D</strong> — Мусор, не стоит тратить время</li>
+                        <li><strong>Не играл</strong> — вы не играли, но не хотите пропускать</li>
+                        <li><strong>Пропустить</strong> — отложить оценку на потом (игры уйдут в конец списка)</li>
+                    </ul>
+                    <p>Используйте кнопку «Назад», чтобы исправить последний выбор.</p>
+                    <p>Все игры должны быть оценены — пропущенные автоматически переместятся в конец.</p>
+                    
+                    <div class="nav-buttons" style="margin-top:30px;">
+                        <button class="back-to-main-btn" onclick="showWelcome()">← На главную</button>
+                        <button class="start-btn" onclick="showThemeSelect()">Перейти к выбору</button>
+                    </div>
+                </div>
             `;
         }
 
@@ -304,88 +521,96 @@
             for (const [key, theme] of Object.entries(THEMES)) {
                 html += `
                     <div class="theme-card" onclick="startTheme('${key}')">
-                        <img src="${theme.img}" class="theme-img" onerror="this.style.display='none';" />
+                        <img src="${theme.img || 'https://via.placeholder.com/120?text=' + theme.title}" class="theme-img" onerror="this.style.display='none';" />
                         <div class="theme-title">🎮 ${theme.title}</div>
                     </div>
                 `;
             }
-            html += `</div><div class="exclusive">Эксклюзив сообщества Fan Games</div>`;
+            html += `</div>`;
             document.getElementById('app').innerHTML = html;
         }
 
         function startTheme(themeKey) {
             currentThemeKey = themeKey;
-            const limits = THEMES[themeKey].limits;
-            assigned = { goty: [], excellent: [], okay: [], trash: [] };
+            const theme = THEMES[themeKey];
+            if (theme.isAward) {
+                awardCategoryIndex = 0;
+                awardVotes = {};
+                showAwardCategory();
+                return;
+            }
+            gamesToVote = [...theme.games];
+            assigned = { s: [], a: [], b: [], c: [], d: [], 'not-played': [] };
             currentIndex = 0;
             renderGameScreen();
         }
 
-        function updateLimitsUI() {
-            const limits = THEMES[currentThemeKey].limits;
-            const used = {
-                goty: assigned.goty.length,
-                excellent: assigned.excellent.length,
-                okay: assigned.okay.length,
-                trash: assigned.trash.length
-            };
-            const html = `
-                <div class="limits">
-                    <div class="limit-box"><div class="limit-title">GOTY</div><div class="limit-count">${used.goty}/${limits.goty}</div></div>
-                    <div class="limit-box"><div class="limit-title">Отлично</div><div class="limit-count">${used.excellent}/${limits.excellent}</div></div>
-                    <div class="limit-box"><div class="limit-title">Терпимо</div><div class="limit-count">${used.okay}/${limits.okay}</div></div>
-                    <div class="limit-box"><div class="limit-title">Мусор</div><div class="limit-count">${used.trash}/${limits.trash}</div></div>
-                </div>
-            `;
-            document.getElementById('limits-container').innerHTML = html;
-        }
-
         function renderGameScreen() {
-            const theme = THEMES[currentThemeKey];
-            if (currentIndex >= theme.games.length) {
+            if (currentIndex >= gamesToVote.length) {
                 renderResults();
                 return;
             }
 
-            const game = theme.games[currentIndex];
-            const limits = theme.limits;
-            const used = {
-                goty: assigned.goty.length,
-                excellent: assigned.excellent.length,
-                okay: assigned.okay.length,
-                trash: assigned.trash.length
-            };
+            const game = gamesToVote[currentIndex];
+            const theme = THEMES[currentThemeKey];
 
-            const disabled = {
-                goty: used.goty >= limits.goty,
-                excellent: used.excellent >= limits.excellent,
-                okay: used.okay >= limits.okay,
-                trash: used.trash >= limits.trash
-            };
+            let buttonsHTML = `
+                <button class="cat-btn s-btn" onclick="assign('s')">S</button>
+                <button class="cat-btn a-btn" onclick="assign('a')">A</button>
+                <button class="cat-btn b-btn" onclick="assign('b')">B</button>
+                <button class="cat-btn c-btn" onclick="assign('c')">C</button>
+                <button class="cat-btn d-btn" onclick="assign('d')">D</button>
+            `;
+
+            if (theme.hasNotPlayed) {
+                buttonsHTML += `<button class="cat-btn not-played-btn" onclick="assign('not-played')">Не играл</button>`;
+            }
+
+            buttonsHTML += `<button class="cat-btn skip-btn" onclick="skipGame()">Пропустить</button>`;
 
             document.getElementById('app').innerHTML = `
-                <div class="progress">${theme.title} • Игра ${currentIndex + 1} из ${theme.games.length}</div>
+                <div class="progress">${THEMES[currentThemeKey].title} • Игра ${currentIndex + 1} из ${gamesToVote.length}</div>
                 <div class="game-card">
-                    <img src="${game.img}" class="game-img" onerror="this.style.display='none';" />
-                    <div class="game-name">${game.name}</div>
-                    <div id="limits-container"></div>
+                    <div class="game-header">
+                        <img src="${game.img}" class="game-img" onerror="this.style.display='none';" />
+                        <div class="game-name">${game.name}</div>
+                    </div>
+                    <div class="game-desc">${game.desc}</div>
                     <div class="categories">
-                        <button class="cat-btn goty-btn" ${disabled.goty ? 'disabled' : ''} onclick="assign('goty')">GOTY</button>
-                        <button class="cat-btn excellent-btn" ${disabled.excellent ? 'disabled' : ''} onclick="assign('excellent')">Отлично</button>
-                        <button class="cat-btn okay-btn" ${disabled.okay ? 'disabled' : ''} onclick="assign('okay')">Терпимо</button>
-                        <button class="cat-btn trash-btn" ${disabled.trash ? 'disabled' : ''} onclick="assign('trash')">Мусор</button>
+                        ${buttonsHTML}
+                    </div>
+                    <div class="nav-buttons">
+                        <button class="back-btn" ${currentIndex <= 0 ? 'disabled' : ''} onclick="goBack()">← Назад</button>
                     </div>
                 </div>
-                <div class="exclusive">Эксклюзив сообщества Fan Games</div>
             `;
-            updateLimitsUI();
         }
 
         function assign(category) {
-            const game = THEMES[currentThemeKey].games[currentIndex];
+            const game = gamesToVote[currentIndex];
             assigned[category].push(game);
             currentIndex++;
             renderGameScreen();
+        }
+
+        function skipGame() {
+            const game = gamesToVote[currentIndex];
+            gamesToVote.splice(currentIndex, 1);
+            gamesToVote.push(game);
+            renderGameScreen();
+        }
+
+        function goBack() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                for (let cat in assigned) {
+                    if (assigned[cat].length > 0 && assigned[cat][assigned[cat].length - 1] === gamesToVote[currentIndex]) {
+                        assigned[cat].pop();
+                        break;
+                    }
+                }
+                renderGameScreen();
+            }
         }
 
         function renderResults() {
@@ -397,14 +622,16 @@
             `;
 
             const tiers = [
-                { key: 'goty', title: 'GOTY', class: 'tier-goat' },
-                { key: 'excellent', title: 'Отлично', class: 'tier-good' },
-                { key: 'okay', title: 'Терпимо', class: 'tier-norm' },
-                { key: 'trash', title: 'Мусор', class: 'tier-bad' }
+                { key: 's', title: 'S', class: 'tier-s' },
+                { key: 'a', title: 'A', class: 'tier-a' },
+                { key: 'b', title: 'B', class: 'tier-b' },
+                { key: 'c', title: 'C', class: 'tier-c' },
+                { key: 'd', title: 'D', class: 'tier-d' },
+                { key: 'not-played', title: 'Не играл', class: 'tier-d' }
             ];
 
             tiers.forEach(t => {
-                if (assigned[t.key].length > 0) {
+                if (assigned[t.key] && assigned[t.key].length > 0) {
                     html += `<div class="tier-list">
                         <div class="tier-header ${t.class}">${t.title}</div>
                         <div class="tier-items">
@@ -421,10 +648,9 @@
                     <button class="action-btn btn-rating" onclick="showRating()">Рейтинг игроков</button>
                     <div style="position:relative; margin-top:15px;">
                         <span style="position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:#ff6b6b; color:white; font-size:10px; padding:3px 8px; border-radius:12px; white-space:nowrap; z-index:10;">В разработке</span>
-                        <button class="action-btn btn-share" disabled style="opacity:0.6; cursor:not-allowed;">Поделиться</button>
+                        <button class="action-btn btn-share" onclick="share()">Поделиться</button>
                     </div>
                 </div>
-                <div class="exclusive">Эксклюзив сообщества Fan Games</div>
             `;
 
             document.getElementById('app').innerHTML = html;
@@ -432,18 +658,20 @@
 
         function showRating() {
             const theme = THEMES[currentThemeKey];
+            if (theme.isAward) {
+                showAwardRating();
+                return;
+            }
             let html = `
                 <div style="text-align:center;margin-bottom:20px;">
                     <h2>Рейтинг игроков</h2>
                     <p>${theme.title}</p>
                 </div>
                 <div class="tier-list">
-                    <div class="tier-header tier-goat">GOTY</div>
+                    <div class="tier-header tier-s">S</div>
                     <div class="tier-items">
                         ${theme.games.map(g => {
-                            // Генерируем случайный процент (для заглушки)
                             const percent = Math.floor(Math.random() * 100);
-                            // Определяем цвет бара: если >70% — зелёный, иначе красный
                             const barColor = percent > 70 ? '#4caf50' : '#f44336';
                             return `
                                 <div class="tier-item" style="display:flex;align-items:center;justify-content:space-between;padding:12px;background:#f9f9f9;margin-bottom:8px;border-radius:8px;">
@@ -458,23 +686,187 @@
                     </div>
                 </div>
                 <button class="action-btn btn-theme" onclick="renderResults()" style="width:100%;margin-top:20px;">← Назад</button>
-                <div class="exclusive">Эксклюзив сообщества Fan Games</div>
             `;
             document.getElementById('app').innerHTML = html;
         }
 
-        function share() {
-            const theme = THEMES[currentThemeKey].title;
-            const channelLink = "https://t.me/fan_games_channel"; // ← ЗАМЕНИТЕ на вашу ссылку!
-            const appLink = window.location.href;
+        function showAwardCategory() {
+            const theme = THEMES[currentThemeKey];
+            const category = theme.categories[awardCategoryIndex];
+            if (!category) {
+                renderAwardResults();
+                return;
+            }
 
-            const text = `ТИР-ЛИСТ "${theme}"\nСобери свой и делись с друзьями в ${channelLink}\n\nСоздать свой тир-лист → ${appLink}`;
+            let html = `
+                <div class="awards-card">
+                    <div class="award-question">🏆 ${category.name}</div>
+                    <div class="award-games">
+                        ${category.games.map(g => `
+                            <div class="award-game" onclick="selectAwardGame('${g.name}')">
+                                <img src="${g.img}" class="award-img" onerror="this.style.display='none';" />
+                                <div class="award-game-name">${g.name}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="back-btn" ${awardCategoryIndex <= 0 ? 'disabled' : ''} onclick="goBackAward()">← Назад</button>
+                </div>
+            `;
+            document.getElementById('app').innerHTML = html;
+        }
+
+        function selectAwardGame(gameName) {
+            const category = THEMES[currentThemeKey].categories[awardCategoryIndex];
+            awardVotes[category.name] = gameName;
+            awardCategoryIndex++;
+            showAwardCategory();
+        }
+
+        function goBackAward() {
+            if (awardCategoryIndex > 0) {
+                awardCategoryIndex--;
+                delete awardVotes[THEMES[currentThemeKey].categories[awardCategoryIndex].name];
+                showAwardCategory();
+            }
+        }
+
+        function renderAwardResults() {
+            const theme = THEMES[currentThemeKey];
+            let html = `
+                <div style="text-align:center;margin-bottom:20px;">
+                    <h2>🏆 Fan Games Awards</h2>
+                </div>
+            `;
+
+            for (let cat in awardVotes) {
+                html += `
+                    <div class="tier-list">
+                        <div class="tier-header tier-s">${cat}</div>
+                        <div class="tier-items">
+                            <div class="tier-item">${awardVotes[cat]}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += `
+                <div class="result-actions">
+                    <button class="action-btn btn-theme" onclick="showThemeSelect()">Другая тема</button>
+                    <button class="action-btn btn-retry" onclick="startTheme('${currentThemeKey}')">Пересоздать</button>
+                    <button class="action-btn btn-rating" onclick="showAwardRating()">Рейтинг</button>
+                    <div style="position:relative; margin-top:15px;">
+                        <span style="position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:#ff6b6b; color:white; font-size:10px; padding:3px 8px; border-radius:12px; white-space:nowrap; z-index:10;">В разработке</span>
+                        <button class="action-btn btn-share" onclick="share()">Поделиться</button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('app').innerHTML = html;
+        }
+
+        function showAwardRating() {
+            const theme = THEMES[currentThemeKey];
+            let html = `
+                <div style="text-align:center;margin-bottom:20px;">
+                    <h2>Рейтинг игроков</h2>
+                    <p>Fan Games Awards</p>
+                </div>
+            `;
+
+            for (let i = 0; i < theme.categories.length; i++) {
+                const category = theme.categories[i];
+                html += `
+                    <div class="tier-list">
+                        <div class="tier-header tier-s">${category.name}</div>
+                        <div class="tier-items">
+                            ${category.games.map(g => {
+                                const percent = Math.floor(Math.random() * 100);
+                                const barColor = percent > 70 ? '#4caf50' : '#f44336';
+                                return `
+                                    <div class="tier-item" style="display:flex;align-items:center;justify-content:space-between;padding:12px;background:#f9f9f9;margin-bottom:8px;border-radius:8px;">
+                                        <span style="flex:1;">${g.name}</span>
+                                        <div style="width:100px;height:8px;background:#eee;border-radius:4px;margin:0 10px;position:relative;">
+                                            <div style="height:100%;border-radius:4px;position:absolute;left:0;top:0;width:${percent}%;background:${barColor};"></div>
+                                        </div>
+                                        <span style="font-weight:bold;">${percent}%</span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += `
+                <button class="action-btn btn-theme" onclick="renderAwardResults()" style="width:100%;margin-top:20px;">← Назад</button>
+            `;
+            document.getElementById('app').innerHTML = html;
+        }
+
+        // === ФУНКЦИЯ ПОДЕЛИТЬСЯ ===
+        function share() {
+            const theme = THEMES[currentThemeKey];
+            let text = "";
+
+            if (theme.isAward) {
+                text = generateShareTextAwards();
+            } else {
+                text = generateShareTextTiers();
+            }
 
             if (navigator.share) {
-                navigator.share({ title: 'Мой тир-лист', text }).catch(() => copyText(text));
+                navigator.share({
+                    title: 'Мой тир-лист',
+                    text: text
+                }).catch(() => copyText(text));
             } else {
                 copyText(text);
             }
+        }
+
+        function generateShareTextTiers() {
+            const theme = THEMES[currentThemeKey];
+            let text = `🎮 Тир-лист "${theme.title}"\n\n`;
+
+            const tiers = [
+                { key: 's', title: 'S' },
+                { key: 'a', title: 'A' },
+                { key: 'b', title: 'B' },
+                { key: 'c', title: 'C' },
+                { key: 'd', title: 'D' },
+                { key: 'not-played', title: 'Не играл' }
+            ];
+
+            tiers.forEach(t => {
+                if (assigned[t.key] && assigned[t.key].length > 0) {
+                    text += `🏆 ${t.title}\n`;
+                    assigned[t.key].forEach(game => {
+                        text += `• ${game.name}\n`;
+                    });
+                    text += `\n`;
+                }
+            });
+
+            text += `Собери свой и делись с друзьями!\n`;
+            text += `Создать свой тир-лист → ${window.location.href}`;
+
+            return text;
+        }
+
+        function generateShareTextAwards() {
+            let text = `🏆 Fan Games Awards\n\n`;
+
+            for (let cat in awardVotes) {
+                text += `🎖️ ${cat}\n`;
+                text += `${awardVotes[cat]}\n\n`;
+            }
+
+            text += `Собери свой и делись с друзьями!\n`;
+            text += `Создать свой тир-лист → ${window.location.href}`;
+
+            return text;
         }
 
         function copyText(text) {
@@ -483,11 +875,7 @@
             });
         }
 
-        // СТАРТ
         showWelcome();
     </script>
 </body>
 </html>
-
-
-
