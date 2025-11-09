@@ -317,25 +317,6 @@
             .tier-item { padding: 10px; }
             .progress { font-size: 14px; }
         }
-
-        /* === КНОПКА ОТКРЫТЬ ТИР ЛИСТ === */
-        .share-button {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            background: #4a6cf7;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            text-align: center;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .share-button:hover {
-            background: #3a5bf5;
-        }
     </style>
 </head>
 <body>
@@ -457,14 +438,12 @@
                 isAward: true,
                 categories: [
                     { name: "Игра года", games: [
-                        { name: "Baldur's Gate 3", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6m6u.jpg" },
                         { name: "The Witcher 3", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1xqo.jpg" },
                         { name: "Elden Ring", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2r.jpg" },
                         { name: "Hades", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2t.jpg" },
                         { name: "Disco Elysium", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2i9w.jpg" },
                         { name: "Celeste", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j6d.jpg" },
                         { name: "Hollow Knight", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j68.jpg" },
-                        { name: "Vampire Survivors", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2u.jpg" },
                         { name: "Dead Cells", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j5w.jpg" },
                         { name: "Metroid Dread", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n31.jpg" }
                     ] },
@@ -671,7 +650,7 @@
                     <button class="action-btn btn-rating" onclick="showRating()">Рейтинг игроков</button>
                     <div style="position:relative; margin-top:15px;">
                         <span style="position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:#ff6b6b; color:white; font-size:10px; padding:3px 8px; border-radius:12px; white-space:nowrap; z-index:10;">В разработке</span>
-                        <button class="action-btn btn-share" onclick="share()">Поделиться</button>
+                        <button class="action-btn btn-share" disabled style="opacity:0.6; cursor:not-allowed;">Поделиться</button>
                     </div>
                 </div>
             `;
@@ -743,6 +722,7 @@
         // ✅ ИСПРАВЛЕНИЕ БАГА С ПЕРВОЙ ИГРОЙ
         function selectAwardGame(gameName) {
             const category = THEMES[currentThemeKey].categories[awardCategoryIndex];
+            if (!category) return;
             awardVotes[category.name] = gameName;
             awardCategoryIndex++;
             showAwardCategory();
@@ -782,7 +762,7 @@
                     <button class="action-btn btn-rating" onclick="showAwardRating()">Рейтинг</button>
                     <div style="position:relative; margin-top:15px;">
                         <span style="position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:#ff6b6b; color:white; font-size:10px; padding:3px 8px; border-radius:12px; white-space:nowrap; z-index:10;">В разработке</span>
-                        <button class="action-btn btn-share" onclick="share()">Поделиться</button>
+                        <button class="action-btn btn-share" disabled style="opacity:0.6; cursor:not-allowed;">Поделиться</button>
                     </div>
                 </div>
             `;
@@ -829,69 +809,8 @@
             document.getElementById('app').innerHTML = html;
         }
 
-        // ✅ КНОПКА ОТКРЫТЬ ТИР ЛИСТ — ОТПРАВЛЯЕТ В ЧАТ С БОТОМ
         function share() {
-            const theme = THEMES[currentThemeKey];
-            let text = "";
-
-            if (theme.isAward) {
-                text = generateShareTextAwards();
-            } else {
-                text = generateShareTextTiers();
-            }
-
-            // Отправляем в чат с ботом через Telegram Mini App API
-            if (window.Telegram && window.Telegram.WebApp) {
-                window.Telegram.WebApp.openTelegramLink(`https://t.me/${window.location.hostname}?start=${encodeURIComponent(text)}`);
-            } else {
-                // Если нет WebApp — копируем в буфер
-                navigator.clipboard.writeText(text).then(() => {
-                    alert('✅ Текст скопирован!\nОтправь его в Telegram.');
-                });
-            }
-        }
-
-        function generateShareTextTiers() {
-            const theme = THEMES[currentThemeKey];
-            let text = `🎮 Тир-лист "${theme.title}"\n\n`;
-
-            const tiers = [
-                { key: 's', title: 'S' },
-                { key: 'a', title: 'A' },
-                { key: 'b', title: 'B' },
-                { key: 'c', title: 'C' },
-                { key: 'd', title: 'D' },
-                { key: 'not-played', title: 'Не играл' }
-            ];
-
-            tiers.forEach(t => {
-                if (assigned[t.key] && assigned[t.key].length > 0) {
-                    text += `🏆 ${t.title}\n`;
-                    assigned[t.key].forEach(game => {
-                        text += `• ${game.name}\n`;
-                    });
-                    text += `\n`;
-                }
-            });
-
-            text += `Собери свой и делись с друзьями!\n`;
-            text += `Создать свой тир-лист → ${window.location.href}`;
-
-            return text;
-        }
-
-        function generateShareTextAwards() {
-            let text = `🏆 Fan Games Awards\n\n`;
-
-            for (let cat in awardVotes) {
-                text += `🎖️ ${cat}\n`;
-                text += `${awardVotes[cat]}\n\n`;
-            }
-
-            text += `Собери свой и делись с друзьями!\n`;
-            text += `Создать свой тир-лист → ${window.location.href}`;
-
-            return text;
+            // Кнопка временно отключена
         }
 
         showWelcome();
