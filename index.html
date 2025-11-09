@@ -364,7 +364,7 @@
             document.getElementById('app').innerHTML = `
                 <div class="progress">${theme.title} • Игра ${currentIndex + 1} из ${theme.games.length}</div>
                 <div class="game-card">
-                    <div class="game-img">${game.img}</div>
+                    <img src="${game.img}" class="game-img" onerror="this.style.display='none';" />
                     <div class="game-name">${game.name}</div>
                     <div id="limits-container"></div>
                     <div class="categories">
@@ -439,15 +439,17 @@
                     <div class="tier-header tier-goat">GOTY</div>
                     <div class="tier-items">
                         ${theme.games.map(g => {
-                            const p = Math.floor(Math.random() * 100);
-                            const c = p > 70 ? '#4caf50' : p > 40 ? '#ff9800' : '#f44336';
+                            // Генерируем случайный процент (для заглушки)
+                            const percent = Math.floor(Math.random() * 100);
+                            // Определяем цвет бара: если >70% — зелёный, иначе красный
+                            const barColor = percent > 70 ? '#4caf50' : '#f44336';
                             return `
-                                <div class="tier-item">
-                                    <span>${g.name}</span>
-                                    <div class="rating-bar">
-                                        <div class="rating-fill" style="width:${p}%;background:${c}"></div>
+                                <div class="tier-item" style="display:flex;align-items:center;justify-content:space-between;padding:12px;background:#f9f9f9;margin-bottom:8px;border-radius:8px;">
+                                    <span style="flex:1;">${g.name}</span>
+                                    <div style="width:100px;height:8px;background:#eee;border-radius:4px;margin:0 10px;position:relative;">
+                                        <div style="height:100%;border-radius:4px;position:absolute;left:0;top:0;width:${percent}%;background:${barColor};"></div>
                                     </div>
-                                    <span>${p}%</span>
+                                    <span style="font-weight:bold;">${percent}%</span>
                                 </div>
                             `;
                         }).join('')}
@@ -484,4 +486,5 @@
     </script>
 </body>
 </html>
+
 
