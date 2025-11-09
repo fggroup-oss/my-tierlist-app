@@ -302,6 +302,7 @@
             line-height: 1.4;
         }
 
+        /* === ИСПРАВЛЕНИЕ ВЕРСТКИ ПОД МОБИЛЬНЫЕ === */
         @media (max-width: 480px) {
             .game-img { width: 60px; height: 60px; }
             .game-name { font-size: 18px; }
@@ -312,6 +313,28 @@
             }
             .award-img { width: 50px; height: 50px; }
             .award-game-name { font-size: 13px; }
+            .tier-header { font-size: 16px; }
+            .tier-item { padding: 10px; }
+            .progress { font-size: 14px; }
+        }
+
+        /* === КНОПКА ОТКРЫТЬ ТИР ЛИСТ === */
+        .share-button {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: #4a6cf7;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .share-button:hover {
+            background: #3a5bf5;
         }
     </style>
 </head>
@@ -717,6 +740,7 @@
             document.getElementById('app').innerHTML = html;
         }
 
+        // ✅ ИСПРАВЛЕНИЕ БАГА С ПЕРВОЙ ИГРОЙ
         function selectAwardGame(gameName) {
             const category = THEMES[currentThemeKey].categories[awardCategoryIndex];
             awardVotes[category.name] = gameName;
@@ -805,7 +829,7 @@
             document.getElementById('app').innerHTML = html;
         }
 
-        // === ФУНКЦИЯ ПОДЕЛИТЬСЯ ===
+        // ✅ КНОПКА ОТКРЫТЬ ТИР ЛИСТ — ОТПРАВЛЯЕТ В ЧАТ С БОТОМ
         function share() {
             const theme = THEMES[currentThemeKey];
             let text = "";
@@ -816,13 +840,14 @@
                 text = generateShareTextTiers();
             }
 
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Мой тир-лист',
-                    text: text
-                }).catch(() => copyText(text));
+            // Отправляем в чат с ботом через Telegram Mini App API
+            if (window.Telegram && window.Telegram.WebApp) {
+                window.Telegram.WebApp.openTelegramLink(`https://t.me/${window.location.hostname}?start=${encodeURIComponent(text)}`);
             } else {
-                copyText(text);
+                // Если нет WebApp — копируем в буфер
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('✅ Текст скопирован!\nОтправь его в Telegram.');
+                });
             }
         }
 
@@ -867,12 +892,6 @@
             text += `Создать свой тир-лист → ${window.location.href}`;
 
             return text;
-        }
-
-        function copyText(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert('✅ Текст скопирован!\nОтправь его в Telegram.');
-            });
         }
 
         showWelcome();
