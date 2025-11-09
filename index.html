@@ -226,6 +226,7 @@
         const THEMES = {
             metroidvania: {
                 title: "Метроидвании",
+                img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/best-metroidvanias-nintendo-switch-11.jpg",
                 // ЛИМИТЫ — менять можно здесь!
                 limits: { goty: 1, excellent: 5, okay: 7, trash: 7 },
                 games: [
@@ -253,6 +254,7 @@
             },
             rpg: {
                 title: "Ролевые игры (RPG)",
+                img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/obsidian-games-1920x1080.jpg",
                 limits: { goty: 2, excellent: 6, okay: 6, trash: 6 },
                 games: [
                     { name: "The Witcher 3", img: "https://raw.githubusercontent.com/fggroup-oss/my-tierlist-app/refs/heads/main/img/witcher_3_wild_hunt-square_1.png" },
@@ -302,7 +304,7 @@
             for (const [key, theme] of Object.entries(THEMES)) {
                 html += `
                     <div class="theme-card" onclick="startTheme('${key}')">
-                        <div class="theme-img">Картинка: ${theme.title}</div>
+                        <img src="${theme.img}" class="theme-img" onerror="this.style.display='none';" />
                         <div class="theme-title">🎮 ${theme.title}</div>
                     </div>
                 `;
@@ -486,5 +488,6 @@
     </script>
 </body>
 </html>
+
 
 
