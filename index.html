@@ -357,9 +357,6 @@
         <div class="version">Версия 1.1</div>
     </div>
 
-    <!-- Скрытый canvas для генерации картинки -->
-    <canvas id="resultCanvas" style="display:none;"></canvas>
-
     <script>
         const THEMES = {
             rpg: {
@@ -522,6 +519,9 @@
                     <button class="start-btn" onclick="showThemeSelect()">Начать →</button>
                     <button class="rules-btn" onclick="showRules()">📜 Правила</button>
                 </div>
+                <div class="nav-buttons" style="margin-top:20px;">
+                    <button class="back-to-main-btn" onclick="showWelcome()">На главную</button>
+                </div>
             `;
         }
 
@@ -543,7 +543,7 @@
                     <p>Все игры должны быть оценены — пропущенные автоматически переместятся в конец.</p>
                     
                     <div class="nav-buttons" style="margin-top:30px;">
-                        <button class="back-to-main-btn" onclick="showWelcome()">← На главную</button>
+                        <button class="back-to-main-btn" onclick="showWelcome()">На главную</button>
                         <button class="start-btn" onclick="showThemeSelect()">Перейти к выбору</button>
                     </div>
                 </div>
@@ -560,7 +560,10 @@
                     </div>
                 `;
             }
-            html += `</div>`;
+            html += `</div>
+                <div class="nav-buttons" style="margin-top:20px;">
+                    <button class="back-to-main-btn" onclick="showWelcome()">На главную</button>
+                </div>`;
             document.getElementById('app').innerHTML = html;
         }
 
@@ -615,6 +618,7 @@
                     </div>
                     <div class="nav-buttons">
                         <button class="back-btn" ${currentIndex <= 0 ? 'disabled' : ''} onclick="goBack()">← Назад</button>
+                        <button class="back-to-main-btn" onclick="showWelcome()">На главную</button>
                     </div>
                 </div>
             `;
@@ -682,6 +686,9 @@
                     <button class="action-btn btn-rating" onclick="showRating()">Рейтинг игроков</button>
                     <button class="action-btn btn-share" onclick="shareResult()">Поделиться</button>
                 </div>
+                <div class="nav-buttons" style="margin-top:20px;">
+                    <button class="back-to-main-btn" onclick="showWelcome()">На главную</button>
+                </div>
             `;
 
             document.getElementById('app').innerHTML = html;
@@ -716,7 +723,9 @@
                         }).join('')}
                     </div>
                 </div>
-                <button class="action-btn btn-theme" onclick="renderResults()" style="width:100%;margin-top:20px;">← Назад</button>
+                <div class="nav-buttons" style="margin-top:20px;">
+                    <button class="back-to-main-btn" onclick="renderResults()">На главную</button>
+                </div>
             `;
             document.getElementById('app').innerHTML = html;
         }
@@ -743,6 +752,7 @@
                 </div>
                 <div class="nav-buttons">
                     <button class="back-btn" ${awardCategoryIndex <= 0 ? 'disabled' : ''} onclick="goBackAward()">← Назад</button>
+                    <button class="back-to-main-btn" onclick="showWelcome()">На главную</button>
                 </div>
             `;
             document.getElementById('app').innerHTML = html;
@@ -790,6 +800,9 @@
                     <button class="action-btn btn-rating" onclick="showAwardRating()">Рейтинг</button>
                     <button class="action-btn btn-share" onclick="shareResult()">Поделиться</button>
                 </div>
+                <div class="nav-buttons" style="margin-top:20px;">
+                    <button class="back-to-main-btn" onclick="showWelcome()">На главную</button>
+                </div>
             `;
 
             document.getElementById('app').innerHTML = html;
@@ -829,87 +842,70 @@
             }
 
             html += `
-                <button class="action-btn btn-theme" onclick="renderAwardResults()" style="width:100%;margin-top:20px;">← Назад</button>
+                <div class="nav-buttons" style="margin-top:20px;">
+                    <button class="back-to-main-btn" onclick="renderAwardResults()">На главную</button>
+                </div>
             `;
             document.getElementById('app').innerHTML = html;
         }
 
-        // === ФУНКЦИЯ ПОДЕЛИТЬСЯ — ГЕНЕРИРУЕТ И СКАЧИВАЕТ КАРТИНКУ ===
+        // === ФУНКЦИЯ ПОДЕЛИТЬСЯ — КОПИРОВАНИЕ ТЕКСТА ===
         function shareResult() {
-            generateImage();
-        }
-
-        // === ГЕНЕРАЦИЯ КАРТИНКИ ===
-        function generateImage() {
             const theme = THEMES[currentThemeKey];
-            const canvas = document.getElementById('resultCanvas');
-            const ctx = canvas.getContext('2d');
+            let text = "";
 
-            // Установим размеры
-            canvas.width = 800;
-            canvas.height = 1000; // Примерный размер
-
-            // Заливка фона
-            ctx.fillStyle = '#f0f0f0';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Заголовок
-            ctx.fillStyle = 'black';
-            ctx.font = 'bold 36px Arial';
-            ctx.fillText(`🏆 ${theme.title}`, 20, 50);
-
-            // Рисуем тиры
-            let y = 100;
-            const tiers = [
-                { key: 's', title: 'S', color: '#4CAF50' },
-                { key: 'a', title: 'A', color: '#8BC34A' },
-                { key: 'b', title: 'B', color: '#FF9800' },
-                { key: 'c', title: 'C', color: '#FFCC80' },
-                { key: 'd', title: 'D', color: '#F44336' },
-                { key: 'not-played', title: 'Не играл', color: '#9E9E9E' }
-            ];
-
-            for (const tier of tiers) {
-                if (!assigned[tier.key] || assigned[tier.key].length === 0) continue;
-
-                // Заголовок тира
-                ctx.fillStyle = tier.color;
-                ctx.fillRect(20, y, 50, 50);
-                ctx.fillStyle = 'white';
-                ctx.font = 'bold 24px Arial';
-                ctx.fillText(tier.title, 35, y + 35);
-
-                // Игры
-                let gameY = y + 70;
-                for (const game of assigned[tier.key]) {
-                    // Рисуем обложку
-                    const img = new Image();
-                    img.crossOrigin = "Anonymous";
-                    img.src = game.img || 'https://via.placeholder.com/60?text=No+Image';
-                    img.onload = function() {
-                        ctx.drawImage(img, 20, gameY, 60, 60);
-                    };
-
-                    // Название
-                    ctx.fillStyle = 'black';
-                    ctx.font = '20px Arial';
-                    ctx.fillText(game.name, 100, gameY + 40);
-
-                    gameY += 80;
-                }
-
-                y = gameY + 30;
+            if (theme.isAward) {
+                text = generateShareTextAwards();
+            } else {
+                text = generateShareTextTiers();
             }
 
-            // Скачиваем изображение
-            const imgURL = canvas.toDataURL('image/png');
-            const link = document.createElement('a');
-            link.href = imgURL;
-            link.download = `tierlist_${theme.title}.png`;
-            link.click();
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Текст скопирован!\nОтправь его в @GameTierListBot или любой чат.');
+            }).catch(() => {
+                alert('❌ Не удалось скопировать. Попробуйте вручную выделить и скопировать текст.');
+            });
+        }
 
-            // Уведомление
-            alert('✅ Картинка готова! Теперь вы можете поделиться ею в чате.');
+        function generateShareTextTiers() {
+            const theme = THEMES[currentThemeKey];
+            let text = `🎮 Тир-лист "${theme.title}"\n\n`;
+
+            const tiers = [
+                { key: 's', title: 'S' },
+                { key: 'a', title: 'A' },
+                { key: 'b', title: 'B' },
+                { key: 'c', title: 'C' },
+                { key: 'd', title: 'D' },
+                { key: 'not-played', title: 'Не играл' }
+            ];
+
+            tiers.forEach(t => {
+                if (assigned[t.key] && assigned[t.key].length > 0) {
+                    text += `🏆 ${t.title}\n`;
+                    assigned[t.key].forEach(game => {
+                        text += `• ${game.name}\n`;
+                    });
+                    text += `\n`;
+                }
+            });
+
+            text += `\nСобери свой тир-лист и поделись им в @GameTierListBot или любом чате.`;
+
+            return text;
+        }
+
+        function generateShareTextAwards() {
+            let text = `🏆 Fan Games Awards\n\n`;
+
+            for (let cat in awardVotes) {
+                text += `🎖️ ${cat}\n`;
+                text += `${awardVotes[cat]}\n\n`;
+            }
+
+            text += `\nСобери свой тир-лист и поделись им в @GameTierListBot или любом чате.`;
+
+            return text;
         }
 
         showWelcome();
