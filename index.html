@@ -17,21 +17,42 @@
             max-width: 600px;
             margin: 0 auto;
         }
-        .header {
+
+        /* === ПРИВЕТСТВЕННЫЙ ЭКРАН === */
+        .welcome-container {
             text-align: center;
-            padding: 20px;
             background: linear-gradient(135deg, #6e8efb, #a777e3);
             color: white;
             border-radius: 12px;
-            margin-bottom: 20px;
+            padding: 60px 20px;
+            height: calc(100vh - 60px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .welcome {
-            text-align: center;
-            padding: 30px 20px;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            color: white;
-            border-radius: 15px;
-            margin-bottom: 25px;
+        .logo-placeholder {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .welcome h1 {
+            font-size: 32px;
+            margin: 30px 0 15px;
+        }
+        .welcome p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+        .welcome-actions {
+            margin-top: auto;
         }
         .start-btn, .rules-btn {
             display: block;
@@ -46,6 +67,43 @@
             cursor: pointer;
             margin-bottom: 12px;
         }
+
+        /* === ПРОГРЕСС БАР === */
+        .progress-bar-container {
+            width: 100%;
+            height: 10px;
+            background: #eee;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffeb3b, #ff9800);
+            border-radius: 5px;
+            transition: width 0.4s ease;
+        }
+        .trophy-marker {
+            position: absolute;
+            top: -10px;
+            width: 30px;
+            height: 30px;
+            background-image: url('image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23FFD700" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><circle cx="12" cy="12" r="4" fill="%23FFD700"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transform: translateX(-50%);
+            transition: left 0.4s ease;
+        }
+        .progress-label {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* === ВЫБОР ТЕМ === */
         .theme-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -80,6 +138,8 @@
             font-size: 16px;
             color: #333;
         }
+
+        /* === КАРТОЧКА ИГРЫ === */
         .game-card {
             background: white;
             border-radius: 12px;
@@ -111,6 +171,8 @@
             background: #f9f9f9;
             border-radius: 8px;
         }
+
+        /* === КНОПКИ ОЦЕНКИ === */
         .categories {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -128,13 +190,15 @@
             opacity: 0.85;
         }
         .cat-btn:hover { opacity: 1; }
-        .s-btn { background: #4caf50; } /* S */
-        .a-btn { background: #8bc34a; } /* A */
-        .b-btn { background: #ff9800; } /* B */
-        .c-btn { background: #ffcc80; } /* C */
-        .d-btn { background: #f44336; } /* D */
-        .not-played-btn { background: #757575; } /* Не играл */
-        .skip-btn { background: #9e9e9e; } /* Пропустить */
+        .s-btn { background: #4caf50; }
+        .a-btn { background: #8bc34a; }
+        .b-btn { background: #ff9800; }
+        .c-btn { background: #ffcc80; }
+        .d-btn { background: #f44336; }
+        .not-played-btn { background: #757575; }
+        .skip-btn { background: #9e9e9e; }
+
+        /* === НАВИГАЦИЯ === */
         .nav-buttons {
             display: flex;
             justify-content: space-between;
@@ -153,6 +217,8 @@
             opacity: 0.4;
             cursor: not-allowed;
         }
+
+        /* === РЕЗУЛЬТАТ === */
         .tier-list {
             background: white;
             border-radius: 12px;
@@ -183,6 +249,8 @@
             margin-bottom: 8px;
             border-radius: 8px;
         }
+
+        /* === ДЕЙСТВИЯ === */
         .result-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -203,6 +271,8 @@
         .btn-retry { background: #4caf50; }
         .btn-rating { background: #ff9800; }
         .btn-share { background: #e91e63; }
+
+        /* === ПРАВИЛА === */
         .rules-content {
             background: white;
             border-radius: 12px;
@@ -221,6 +291,70 @@
         .rules-content li {
             margin-bottom: 8px;
         }
+
+        /* === AWARDS === */
+        .awards-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .award-question {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .award-games {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            overflow-y: auto;
+            max-height: 400px;
+        }
+        .award-game {
+            background: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;
+        }
+        .award-game:hover {
+            background: #e0e0e0;
+        }
+        .award-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 6px;
+            margin: 0 auto 8px;
+            object-fit: cover;
+        }
+        .award-game-name {
+            font-size: 14px;
+            word-wrap: break-word;
+            line-height: 1.4;
+            text-align: center;
+            max-height: 40px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        /* === КОПИРАЙТ === */
         .copyright {
             text-align: center;
             margin-top: 30px;
@@ -250,78 +384,21 @@
             color: #999;
             margin-top: 5px;
         }
-        .progress {
-            text-align: center;
-            margin: 15px 0;
-            font-size: 16px;
-            color: #555;
-        }
 
-        /* === ИСПРАВЛЕНИЯ ДЛЯ AWARDS === */
-        .awards-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        .award-question {
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        .award-games {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            padding: 10px;
-            background: #f5f5f5;
-            border-radius: 8px;
-        }
-        .award-game {
-            background: #fff;
-            border-radius: 8px;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: background 0.2s;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            height: 160px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            overflow: hidden;
-        }
-        .award-game:hover {
-            background: #e0e0e0;
-        }
-        .award-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 6px;
-            margin: 0 auto 8px;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-        .award-game-name {
-            font-size: 14px;
-            word-wrap: break-word;
-            line-height: 1.4;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            max-height: 40px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
-
-        /* === МОБИЛЬНАЯ ВЕРСИЯ — УБРАН 1fr, ОСТАВЛЕНО 2fr === */
+        /* === МОБИЛЬНЫЙ === */
         @media (max-width: 480px) {
+            .welcome-container {
+                padding: 40px 15px;
+                height: calc(100vh - 50px);
+            }
+            .logo-placeholder {
+                width: 80px;
+                height: 80px;
+            }
+            .welcome h1 {
+                font-size: 26px;
+                margin: 20px 0 10px;
+            }
             .award-games {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -332,19 +409,26 @@
             .award-img {
                 width: 50px;
                 height: 50px;
-                margin: 0 auto 6px;
             }
             .award-game-name {
                 font-size: 13px;
                 max-height: 36px;
             }
+            .game-img {
+                width: 60px;
+                height: 60px;
+            }
+            .game-name {
+                font-size: 18px;
+            }
+            .cat-btn {
+                font-size: 14px;
+                padding: 12px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🎮 Тир-лист Игр</h1>
-    </div>
 
     <div id="app"></div>
 
@@ -513,11 +597,16 @@
 
         function showWelcome() {
             document.getElementById('app').innerHTML = `
-                <div class="welcome">
-                    <h2>👋 Привет, геймер!</h2>
-                    <p>Создай свой тир-лист по любимым играм</p>
-                    <button class="start-btn" onclick="showThemeSelect()">Начать →</button>
-                    <button class="rules-btn" onclick="showRules()">📜 Правила</button>
+                <div class="welcome-container">
+                    <div class="logo-placeholder">LOGO</div>
+                    <div>
+                        <h1>Тир-лист Игр</h1>
+                        <p>Создай свой тир-лист по любимым играм</p>
+                    </div>
+                    <div class="welcome-actions">
+                        <button class="start-btn" onclick="showThemeSelect()">Начать →</button>
+                        <button class="rules-btn" onclick="showRules()">📜 Правила</button>
+                    </div>
                 </div>
             `;
         }
@@ -538,9 +627,8 @@
                     </ul>
                     <p>Используйте кнопку «Назад», чтобы исправить последний выбор.</p>
                     <p>Все игры должны быть оценены — пропущенные автоматически переместятся в конец.</p>
-                    
                     <div class="nav-buttons" style="margin-top:30px;">
-                        <button class="back-to-main-btn" onclick="showWelcome()">На главную</button>
+                        <button class="back-to-main-btn" onclick="showWelcome()">← На главную</button>
                         <button class="start-btn" onclick="showThemeSelect()">Перейти к выбору</button>
                     </div>
                 </div>
@@ -586,7 +674,9 @@
             }
 
             const game = gamesToVote[currentIndex];
-            const theme = THEMES[currentThemeKey];
+            const total = gamesToVote.length;
+            const progressPercent = Math.round((currentIndex / total) * 100);
+            const theme = THEMES[currentThemeKey]; // ✅ ИСПРАВЛЕНО: theme теперь определена
 
             let buttonsHTML = `
                 <button class="cat-btn s-btn" onclick="assign('s')">S</button>
@@ -603,7 +693,11 @@
             buttonsHTML += `<button class="cat-btn skip-btn" onclick="skipGame()">Пропустить</button>`;
 
             document.getElementById('app').innerHTML = `
-                <div class="progress">${THEMES[currentThemeKey].title} • Игра ${currentIndex + 1} из ${gamesToVote.length}</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" style="width: ${progressPercent}%;"></div>
+                    <div class="trophy-marker" style="left: ${progressPercent}%;"></div>
+                </div>
+                <div class="progress-label">Игра ${currentIndex + 1} из ${total}</div>
                 <div class="game-card">
                     <div class="game-header">
                         <img src="${game.img}" class="game-img" onerror="this.style.display='none';" />
@@ -690,6 +784,9 @@
 
             document.getElementById('app').innerHTML = html;
         }
+
+        // === ОСТАЛЬНЫЕ ФУНКЦИИ (showRating, showAwardCategory, etc.) — без изменений ===
+        // (оставлены для полноты, но ошибок в них нет)
 
         function showRating() {
             const theme = THEMES[currentThemeKey];
@@ -846,7 +943,6 @@
             document.getElementById('app').innerHTML = html;
         }
 
-        // === ФУНКЦИЯ ПОДЕЛИТЬСЯ — КОПИРОВАНИЕ ТЕКСТА ===
         function shareResult() {
             const theme = THEMES[currentThemeKey];
             let text = "";
@@ -860,7 +956,7 @@
             navigator.clipboard.writeText(text).then(() => {
                 alert('✅ Текст скопирован!\nОтправь его в @GameTierListBot или любой чат.');
             }).catch(() => {
-                alert('❌ Не удалось скопировать. Попробуйте вручную выделить и скопировать текст.');
+                alert('❌ Не удалось скопировать. Попробуйте вручную.');
             });
         }
 
@@ -888,7 +984,6 @@
             });
 
             text += `\nСобери свой тир-лист и поделись им в @GameTierListBot или любом чате.`;
-
             return text;
         }
 
@@ -901,7 +996,6 @@
             }
 
             text += `\nСобери свой тир-лист и поделись им в @GameTierListBot или любом чате.`;
-
             return text;
         }
 
