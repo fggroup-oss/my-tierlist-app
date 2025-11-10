@@ -149,6 +149,10 @@
             cursor: pointer;
             font-weight: bold;
         }
+        .back-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
         .tier-list {
             background: white;
             border-radius: 12px;
@@ -271,8 +275,6 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            overflow-y: auto;
-            max-height: 400px;
             padding: 10px;
             background: #f5f5f5;
             border-radius: 8px;
@@ -318,11 +320,10 @@
             -webkit-box-orient: vertical;
         }
 
-        /* === МОБИЛЬНАЯ ВЕРСИЯ — УМЕНЬШАЕМ РАЗМЕРЫ === */
+        /* === МОБИЛЬНАЯ ВЕРСИЯ — УБРАН 1fr, ОСТАВЛЕНО 2fr === */
         @media (max-width: 480px) {
             .award-games {
-                grid-template-columns: 1fr;
-                max-height: 300px;
+                grid-template-columns: repeat(2, 1fr);
             }
             .award-game {
                 height: 140px;
@@ -356,11 +357,14 @@
         <div class="version">Версия 1.1</div>
     </div>
 
+    <!-- Скрытый canvas для генерации картинки -->
+    <canvas id="resultCanvas" style="display:none;"></canvas>
+
     <script>
         const THEMES = {
             rpg: {
                 title: "Ролевые игры (RPG)",
-                img: "https://images.stopgame.ru/screenshots/18818/c390x226/vlIbuyBXotrnqFH6_kdFSA/hades-2.jpg",
+                img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
                 hasNotPlayed: true,
                 games: [
                     { name: "Baldur's Gate 3", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6m6u.jpg", desc: "Эпическая RPG с глубокой системой боев и диалогов." },
@@ -387,7 +391,7 @@
             },
             roguelike: {
                 title: "Рогалики",
-                img: "https://images.stopgame.ru/screenshots/18818/c390x226/vlIbuyBXotrnqFH6_kdFSA/hades-2.jpg",
+                img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
                 hasNotPlayed: true,
                 games: [
                     { name: "Hades", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2t.jpg", desc: "Боги Олимпа помогают вам выбраться из Ада." },
@@ -414,7 +418,7 @@
             },
             metroidvania: {
                 title: "Метроидвании",
-                img: "https://images.stopgame.ru/screenshots/18818/c390x226/vlIbuyBXotrnqFH6_kdFSA/hades-2.jpg",
+                img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
                 hasNotPlayed: true,
                 games: [
                     { name: "Hollow Knight", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2j68.jpg", desc: "Тёмный и красивый мир насекомых." },
@@ -441,29 +445,30 @@
             },
             psplus: {
                 title: "Раздачи PS Plus 2025",
-                img: "https://images.stopgame.ru/screenshots/18818/c390x226/vlIbuyBXotrnqFH6_kdFSA/hades-2.jpg",
+                img: "https://images.unsplash.com/photo-1566647387313-9fda80c7c114?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
                 hasNotPlayed: false,
                 games: [
-                    { name: "Январь 2025", img: "https://images.stopgame.ru/games/logos/18818/c280x280/yexZNw83XoOrRxrq9y9HWA/hades-square.jpg", desc: "Игры месяца — январь." },
-                    { name: "Февраль 2025", img: "https://images.stopgame.ru/games/logos/18818/c280x280/yexZNw83XoOrRxrq9y9HWA/hades-square.jpg", desc: "Игры месяца — февраль." },
-                    { name: "Март 2025", img: "https://images.stopgame.ru/games/logos/18818/c280x280/yexZNw83XoOrRxrq9y9HWA/hades-square.jpg", desc: "Игры месяца — март." },
-                    { name: "Апрель 2025", img: "https://images.stopgame.ru/games/logos/18818/c280x280/yexZNw83XoOrRxrq9y9HWA/hades-square.jpg", desc: "Игры месяца — апрель." },
-                    { name: "Май 2025", img: "https://images.stopgame.ru/games/logos/18818/c280x280/yexZNw83XoOrRxrq9y9HWA/hades-square.jpg", desc: "Игры месяца — май." },
-                    { name: "Июнь 2025", img: "https://images.stopgame.ru/games/logos/18818/c280x280/yexZNw83XoOrRxrq9y9HWA/hades-square.jpg", desc: "Игры месяца — июнь." },
-                    { name: "Июль 2025", img: "https://images.stopgame.ru/games/logos/18818/c280x280/yexZNw83XoOrRxrq9y9HWA/hades-square.jpg", desc: "Игры месяца — июль." },
-                    { name: "Август 2025", img: "https://images.stopgame.ru/games/logos/18818/c280x280/yexZNw83XoOrRxrq9y9HWA/hades-square.jpg", desc: "Игры месяца — август." },
-                    { name: "Сентябрь 2025", img: "https://images.stopgame.ru/games/logos/18818/c280x280/yexZNw83XoOrRxrq9y9HWA/hades-square.jpg", desc: "Игры месяца — сентябрь." },
-                    { name: "Октябрь 2025", img: "https://images.stopgame.ru/games/logos/18818/c280x280/yexZNw83XoOrRxrq9y9HWA/hades-square.jpg", desc: "Игры месяца — октябрь." },
-                    { name: "Ноябрь 2025", img: "https://images.stopgame.ru/games/logos/18818/c280x280/yexZNw83XoOrRxrq9y9HWA/hades-square.jpg", desc: "Игры месяца — ноябрь." },
-                    { name: "Декабрь 2025", img: "https://images.stopgame.ru/games/logos/18818/c280x280/yexZNw83XoOrRxrq9y9HWA/hades-square.jpg", desc: "Игры месяца — декабрь." }
+                    { name: "Январь 2025", img: "https://via.placeholder.com/60?text=Jan", desc: "Игра месяца — январь." },
+                    { name: "Февраль 2025", img: "https://via.placeholder.com/60?text=Feb", desc: "Игра месяца — февраль." },
+                    { name: "Март 2025", img: "https://via.placeholder.com/60?text=Mar", desc: "Игра месяца — март." },
+                    { name: "Апрель 2025", img: "https://via.placeholder.com/60?text=Apr", desc: "Игра месяца — апрель." },
+                    { name: "Май 2025", img: "https://via.placeholder.com/60?text=May", desc: "Игра месяца — май." },
+                    { name: "Июнь 2025", img: "https://via.placeholder.com/60?text=Jun", desc: "Игра месяца — июнь." },
+                    { name: "Июль 2025", img: "https://via.placeholder.com/60?text=Jul", desc: "Игра месяца — июль." },
+                    { name: "Август 2025", img: "https://via.placeholder.com/60?text=Aug", desc: "Игра месяца — август." },
+                    { name: "Сентябрь 2025", img: "https://via.placeholder.com/60?text=Sep", desc: "Игра месяца — сентябрь." },
+                    { name: "Октябрь 2025", img: "https://via.placeholder.com/60?text=Oct", desc: "Игра месяца — октябрь." },
+                    { name: "Ноябрь 2025", img: "https://via.placeholder.com/60?text=Nov", desc: "Игра месяца — ноябрь." },
+                    { name: "Декабрь 2025", img: "https://via.placeholder.com/60?text=Dec", desc: "Игра месяца — декабрь." }
                 ]
             },
             awards: {
                 title: "Fan Games Awards",
-                img: "https://images.stopgame.ru/screenshots/18818/c390x226/vlIbuyBXotrnqFH6_kdFSA/hades-2.jpg",
+                img: "https://images.unsplash.com/photo-1511311337426-d52ec26b41a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
                 isAward: true,
                 categories: [
                     { name: "Игра года", games: [
+                        { name: "Baldur's Gate 3", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6m6u.jpg" },
                         { name: "The Witcher 3", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1xqo.jpg" },
                         { name: "Elden Ring", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2r.jpg" },
                         { name: "Hades", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6n2t.jpg" },
@@ -675,7 +680,7 @@
                     <button class="action-btn btn-theme" onclick="showThemeSelect()">Другая тема</button>
                     <button class="action-btn btn-retry" onclick="startTheme('${currentThemeKey}')">Пересоздать</button>
                     <button class="action-btn btn-rating" onclick="showRating()">Рейтинг игроков</button>
-                    <button class="action-btn btn-share" onclick="share()">Поделиться</button>
+                    <button class="action-btn btn-share" onclick="shareResult()">Поделиться</button>
                 </div>
             `;
 
@@ -743,7 +748,6 @@
             document.getElementById('app').innerHTML = html;
         }
 
-        // ✅ ИСПРАВЛЕНИЕ БАГА С ПЕРВОЙ ИГРОЙ
         function selectAwardGame(gameName) {
             const category = THEMES[currentThemeKey].categories[awardCategoryIndex];
             if (!category) return;
@@ -784,7 +788,7 @@
                     <button class="action-btn btn-theme" onclick="showThemeSelect()">Другая тема</button>
                     <button class="action-btn btn-retry" onclick="startTheme('${currentThemeKey}')">Пересоздать</button>
                     <button class="action-btn btn-rating" onclick="showAwardRating()">Рейтинг</button>
-                    <button class="action-btn btn-share" onclick="share()">Поделиться</button>
+                    <button class="action-btn btn-share" onclick="shareResult()">Поделиться</button>
                 </div>
             `;
 
@@ -830,63 +834,82 @@
             document.getElementById('app').innerHTML = html;
         }
 
-        // ✅ КНОПКА ПОДЕЛИТЬСЯ — КОПИРУЕТ ТЕКСТ С УПОМИНАНИЕМ БОТА @GameTierListBot
-        function share() {
-            const theme = THEMES[currentThemeKey];
-            let text = "";
-
-            if (theme.isAward) {
-                text = generateShareTextAwards();
-            } else {
-                text = generateShareTextTiers();
-            }
-
-            navigator.clipboard.writeText(text).then(() => {
-                alert('✅ Текст скопирован!\nОтправь его в @GameTierListBot или любой чат.');
-            }).catch(() => {
-                alert('❌ Не удалось скопировать. Попробуйте вручную выделить и скопировать текст.');
-            });
+        // === ФУНКЦИЯ ПОДЕЛИТЬСЯ — ГЕНЕРИРУЕТ И СКАЧИВАЕТ КАРТИНКУ ===
+        function shareResult() {
+            generateImage();
         }
 
-        function generateShareTextTiers() {
+        // === ГЕНЕРАЦИЯ КАРТИНКИ ===
+        function generateImage() {
             const theme = THEMES[currentThemeKey];
-            let text = `🎮 Тир-лист "${theme.title}"\n\n`;
+            const canvas = document.getElementById('resultCanvas');
+            const ctx = canvas.getContext('2d');
 
+            // Установим размеры
+            canvas.width = 800;
+            canvas.height = 1000; // Примерный размер
+
+            // Заливка фона
+            ctx.fillStyle = '#f0f0f0';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Заголовок
+            ctx.fillStyle = 'black';
+            ctx.font = 'bold 36px Arial';
+            ctx.fillText(`🏆 ${theme.title}`, 20, 50);
+
+            // Рисуем тиры
+            let y = 100;
             const tiers = [
-                { key: 's', title: 'S' },
-                { key: 'a', title: 'A' },
-                { key: 'b', title: 'B' },
-                { key: 'c', title: 'C' },
-                { key: 'd', title: 'D' },
-                { key: 'not-played', title: 'Не играл' }
+                { key: 's', title: 'S', color: '#4CAF50' },
+                { key: 'a', title: 'A', color: '#8BC34A' },
+                { key: 'b', title: 'B', color: '#FF9800' },
+                { key: 'c', title: 'C', color: '#FFCC80' },
+                { key: 'd', title: 'D', color: '#F44336' },
+                { key: 'not-played', title: 'Не играл', color: '#9E9E9E' }
             ];
 
-            tiers.forEach(t => {
-                if (assigned[t.key] && assigned[t.key].length > 0) {
-                    text += `🏆 ${t.title}\n`;
-                    assigned[t.key].forEach(game => {
-                        text += `• ${game.name}\n`;
-                    });
-                    text += `\n`;
+            for (const tier of tiers) {
+                if (!assigned[tier.key] || assigned[tier.key].length === 0) continue;
+
+                // Заголовок тира
+                ctx.fillStyle = tier.color;
+                ctx.fillRect(20, y, 50, 50);
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 24px Arial';
+                ctx.fillText(tier.title, 35, y + 35);
+
+                // Игры
+                let gameY = y + 70;
+                for (const game of assigned[tier.key]) {
+                    // Рисуем обложку
+                    const img = new Image();
+                    img.crossOrigin = "Anonymous";
+                    img.src = game.img || 'https://via.placeholder.com/60?text=No+Image';
+                    img.onload = function() {
+                        ctx.drawImage(img, 20, gameY, 60, 60);
+                    };
+
+                    // Название
+                    ctx.fillStyle = 'black';
+                    ctx.font = '20px Arial';
+                    ctx.fillText(game.name, 100, gameY + 40);
+
+                    gameY += 80;
                 }
-            });
 
-            text += `\nСобери свой тир-лист и поделись им в @GameTierListBot или любом чате.`;
-
-            return text;
-        }
-
-        function generateShareTextAwards() {
-            let text = `🏆 Fan Games Awards\n\n`;
-
-            for (let cat in awardVotes) {
-                text += `🎖️ ${cat}\n`;
-                text += `${awardVotes[cat]}\n\n`;
+                y = gameY + 30;
             }
 
-            text += `\nСобери свой тир-лист и поделись им в @GameTierListBot или любом чате.`;
+            // Скачиваем изображение
+            const imgURL = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.href = imgURL;
+            link.download = `tierlist_${theme.title}.png`;
+            link.click();
 
-            return text;
+            // Уведомление
+            alert('✅ Картинка готова! Теперь вы можете поделиться ею в чате.');
         }
 
         showWelcome();
