@@ -519,9 +519,6 @@
                     <button class="start-btn" onclick="showThemeSelect()">Начать →</button>
                     <button class="rules-btn" onclick="showRules()">📜 Правила</button>
                 </div>
-                <div class="nav-buttons" style="margin-top:20px;">
-                    <button class="back-to-main-btn" onclick="showWelcome()">На главную</button>
-                </div>
             `;
         }
 
@@ -617,7 +614,7 @@
                         ${buttonsHTML}
                     </div>
                     <div class="nav-buttons">
-                        <button class="back-btn" ${currentIndex <= 0 ? 'disabled' : ''} onclick="goBack()">← Назад</button>
+                        ${currentIndex > 0 ? `<button class="back-btn" onclick="goBack()">← Назад</button>` : ''}
                         <button class="back-to-main-btn" onclick="showWelcome()">На главную</button>
                     </div>
                 </div>
@@ -751,7 +748,7 @@
                     </div>
                 </div>
                 <div class="nav-buttons">
-                    <button class="back-btn" ${awardCategoryIndex <= 0 ? 'disabled' : ''} onclick="goBackAward()">← Назад</button>
+                    ${awardCategoryIndex > 0 ? `<button class="back-btn" onclick="goBackAward()">← Назад</button>` : ''}
                     <button class="back-to-main-btn" onclick="showWelcome()">На главную</button>
                 </div>
             `;
